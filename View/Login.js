@@ -81,7 +81,7 @@ const Login = ({ navigation }) => {
           style={styles.input}
           onChangeText={texto => guardarEmail(texto)}
           value={email}
-          textAlign='center'
+          textAlign={'center'}
         />
 
         <TextInput
@@ -90,7 +90,11 @@ const Login = ({ navigation }) => {
           value={contraseña}
           placeholder='Contraseña'
           placeholderTextColor={'#666'}
-          textAlign='center'
+          textAlign={'center'}
+          secureTextEntry={true}
+
+
+
         />
       </View>
 
@@ -149,16 +153,7 @@ const styles = StyleSheet.create({
 
   },
 
-  // input: {
-  //   marginBottom: 20,
-  //   backgroundColor: '#000000',
-  //   color: '#000000',
-  //   paddingVertical: 10,
-  //   paddingHorizontal: 100,
-  //   width: 290,
-  //   height: 20,
-  //   textAlign: 'center',
-  // },
+ 
   input: {
     backgroundColor: '#FFF',
     // borderRadius: 20,
@@ -173,6 +168,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
 
   },
+
 
   btnIniciarSesion: {
     marginVertical: 14,
