@@ -55,7 +55,7 @@ const Login = ({ navigation }) => {
 
   return (
 
-    <View style={styles.container}>
+    <View >
       <Image style={styles.logo}
         source={require('../assets/IMG/Logo.png')}
 
@@ -81,6 +81,7 @@ const Login = ({ navigation }) => {
           style={styles.input}
           onChangeText={texto => guardarEmail(texto)}
           value={email}
+          textAlign='center'
         />
 
         <TextInput
@@ -89,9 +90,7 @@ const Login = ({ navigation }) => {
           value={contraseña}
           placeholder='Contraseña'
           placeholderTextColor={'#666'}
-
-
-
+          textAlign='center'
         />
       </View>
 
@@ -131,17 +130,18 @@ const styles = StyleSheet.create({
   logo: {
     height: 190,
     width: 190,
-    marginTop: 30
+    marginTop: 30,
+    marginHorizontal:80
   },
 
   btnCrearCuenta: {
     marginVertical: 14,
     backgroundColor: '#c1f4c5',
     paddingVertical: 5,
-    marginHorizontal: 10,
+    marginHorizontal: 50,
     marginTop: 50,
     borderRadius: 5,
-    paddingHorizontal: 60,
+   
     fontSize: 20,
     borderColor: '#0F0E0E',
     borderWidth: 1,
@@ -165,15 +165,12 @@ const styles = StyleSheet.create({
     color: '#000000',
     borderWidth: 1,
     borderColor: '#000000',
-    marginHorizontal: 20,
     marginVertical: 15,
-    paddingHorizontal: 100,
-    width: 290,
+    marginRight:60,
+    marginLeft:50,
+    width: 260,
     height: 50,
     marginTop: 10,
-    textAlign:'left'
-
-
 
   },
 
@@ -182,13 +179,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#d9d7f1',
     paddingVertical: 5,
     marginHorizontal: 10,
-    marginTop: -8,
+    marginTop: 10,
     borderRadius: 5,
-    paddingHorizontal: 70,
     fontSize: 24,
     color: '#0F0E0E',
     borderColor: '#0F0E0E',
-    borderWidth: 1
+    borderWidth: 1,
+    marginHorizontal: 50,
 
   },
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, ScrollView,Alert } from 'react-native';
-import { TextInput, Headline, Button, Paragraph, Dialog, Portal } from 'react-native-paper';
+import {TextInput, View, StyleSheet, ScrollView,Alert } from 'react-native';
+import {  Headline, Button, Paragraph, Dialog, Portal } from 'react-native-paper';
 import globalStyles from '../style/global';
 
 
@@ -59,66 +59,76 @@ const CrearCuenta = ({navigation}) => {
     <ScrollView>
       <View style={globalStyles.contenedor}>
         <Headline style={globalStyles.titulo}> Registro</Headline>
+       
 
         <TextInput
-          label="Nombre"
+          placeholder='Nombre'
+          placeholderTextColor={'#666'}
+          style={styles.input}
           onChangeText={texto => guardarNombre(texto)}
           value={nombre}
-          style={styles.input}
 
         />
 
         <TextInput
-          label="Apellido Paterno"
           onChangeText={texto => guardarApellido(texto)}
           value={apellido}
           style={styles.input}
+          placeholder='Apellido Paterno'
+          placeholderTextColor={'#666'}
         />
         <TextInput
-          label="Apellido Materno"
           onChangeText={texto => guardarApellidoMaterno(texto)}
           value={apellidoMaterno}
           style={styles.input}
+          placeholder='Apellido Materno'
+          placeholderTextColor={'#666'}
         />
 
         <TextInput
-          label="Email"
           onChangeText={texto => guardarEmail(texto)}
           value={email}
           style={styles.input}
+          placeholder='Correo'
+          placeholderTextColor={'#666'}
         />
 
         <TextInput
-          label="Contraseña"
           onChangeText={texto => guardarContraseña(texto)}
           value={contraseña}
           secureTextEntry
           style={styles.input}
-          right={<TextInput.Icon name="eye" />}
+          placeholder='Contraseña'
+          placeholderTextColor={'#666'}
+          // right={<TextInput.Icon name="eye" />}
         />
 
 
         <TextInput
-          label="Teléfono"
           onChangeText={texto => guardarTelefono(texto)}
           value={telefono}
           style={styles.input}
+          placeholder='Telefono'
+          placeholderTextColor={'#666'}
+          
         />
 
 
         <TextInput
-          label="Región"
           onChangeText={texto => guardarRegión(texto)}
           value={region}
           style={styles.input}
+          placeholder='Region'
+          placeholderTextColor={'#666'}
         />
 
 
         <TextInput
-          label="Comuna"
           onChangeText={texto => guardarComuna(texto)}
           value={comuna}
           style={styles.input}
+          placeholder='Comuna'
+          placeholderTextColor={'#666'}
         />
 
         <Button color='#0F0E0E' style={styles.btnregistrarUsu} onPress={() => registrarseUsuario()}>
@@ -134,9 +144,18 @@ const CrearCuenta = ({navigation}) => {
 
 const styles = StyleSheet.create({
   input: {
-    marginBottom: 20,
-    backgroundColor: '#000000',
-    color: '#0F0E0E'
+    backgroundColor: '#FFF',
+    // borderRadius: 20,
+    color: '#000000',
+    borderWidth: 1,
+    borderColor: '#000000',
+    marginVertical: 15,
+    marginRight:60,
+    marginLeft:50,
+    width: 260,
+    height: 50,
+    marginTop: 10,
+
   },
 
   btnregistrarUsu: {
