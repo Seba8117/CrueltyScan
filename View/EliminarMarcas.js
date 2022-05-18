@@ -1,25 +1,31 @@
 import React from 'react'
-import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView, Image } from 'react-native'
+import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView, Image, Alert } from 'react-native'
 const EliminarMarcas = ({ navigation }) => {
+    const eliminar = () => {
+        Alert.alert('Alerta', 'Marca eliminada', [
+            { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+        ])
+        navigation.navigate('MenuAdmin')
 
+    }
     return (
         <ScrollView >
             <View style={styles.fondo}>
                 <Text style={styles.titulo}>Cruelty Scan</Text>
-                <Text style={styles.texto}>Listado de Marcas      </Text>   
+                <Text style={styles.texto}>Eliminar Marcas      </Text>
             </View>
             <View>
-                <Pressable style={styles.boton2}>
-                    <Text style={styles.textoboton2} >Garnier <Image style={styles.logo} source={require('../assets/IMG/close.png')}/>   </Text>   
+                <Pressable style={styles.boton2} onPress={() => eliminar()}>
+                    <Text style={styles.textoboton2} ><Image style={styles.logo} source={require('../assets/IMG/close.png')} /> Garnier    </Text>
                 </Pressable>
 
-                <Pressable style={styles.boton2} >
-                    <Text style={styles.textoboton2} >The Body Shop  <Image style={styles.logo} source={require('../assets/IMG/close.png')}/>     </Text>
+                <Pressable style={styles.boton2} onPress={() => eliminar()} >
+                    <Text style={styles.textoboton2} ><Image style={styles.logo} source={require('../assets/IMG/close.png')} /> The Body Shop  </Text>
                 </Pressable>
 
 
-                <Pressable style={styles.boton2} >
-                    <Text style={styles.textoboton2} >Avene   <Image style={styles.logo} source={require('../assets/IMG/close.png')}/>    </Text>
+                <Pressable style={styles.boton2} onPress={() => eliminar()}>
+                    <Text style={styles.textoboton2} ><Image style={styles.logo} source={require('../assets/IMG/close.png')} /> Avene       </Text>
                 </Pressable>
 
 
@@ -47,15 +53,15 @@ const styles = StyleSheet.create({
     },
     logo: {
         width: 23,
-        height: 23, 
-    
-      },
+        height: 23,
+
+    },
     texto: {
         color: '#000000',
         marginTop: 20,
         fontSize: 18,
         textAlign: 'center',
-        marginVertical:40
+        marginVertical: 40
 
     },
     letras: {

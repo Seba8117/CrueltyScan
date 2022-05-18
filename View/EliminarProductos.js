@@ -1,7 +1,14 @@
 import React from 'react'
-import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView, Image } from 'react-native'
+import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView, Image, Alert } from 'react-native'
 
 const EliminarProductos = ({ navigation }) => {
+    const eliminar = () => {
+        Alert.alert('Alerta', 'Producto eliminado', [
+            { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+        ])
+        navigation.navigate('MenuAdmin')
+
+    }
 
     return (
         <ScrollView >
@@ -10,22 +17,22 @@ const EliminarProductos = ({ navigation }) => {
                 <Text style={styles.texto}>ELiminar Productos</Text>
             </View>
             <View>
-            <Pressable style={styles.boton2}>
-                    <Text style={styles.textoboton2} >Crema Garnier <Image style={styles.logo} source={require('../assets/IMG/close.png')}/>   </Text>   
+                <Pressable style={styles.boton2} onPress={() => eliminar()}>
+                    <Text style={styles.textoboton2} ><Image style={styles.logo} source={require('../assets/IMG/close.png')} /> Crema Garnier    </Text>
                 </Pressable>
 
-                <Pressable style={styles.boton2} >
-                    <Text style={styles.textoboton2} >Base The Body Shop  <Image style={styles.logo} source={require('../assets/IMG/close.png')}/>     </Text>
+                <Pressable style={styles.boton2} onPress={() => eliminar()}>
+                    <Text style={styles.textoboton2} ><Image style={styles.logo} source={require('../assets/IMG/close.png')} /> Base The Body Shop       </Text>
                 </Pressable>
 
 
-                <Pressable style={styles.boton2} >
-                    <Text style={styles.textoboton2} >Maquillaje Avene   <Image style={styles.logo} source={require('../assets/IMG/close.png')}/>    </Text>
+                <Pressable style={styles.boton2} onPress={() => eliminar()}>
+                    <Text style={styles.textoboton2}  ><Image style={styles.logo} source={require('../assets/IMG/close.png')} /> Maquillaje Avene   </Text>
                 </Pressable>
-               
+
 
             </View>
-        
+
         </ScrollView>
 
 
@@ -53,15 +60,15 @@ const styles = StyleSheet.create({
     },
     logo: {
         width: 23,
-        height: 23, 
-    
-      },
+        height: 23,
+
+    },
     texto: {
         color: '#000000',
         marginTop: 20,
         fontSize: 18,
         textAlign: 'center',
-        marginVertical:40
+        marginVertical: 40
 
     },
     letras: {
