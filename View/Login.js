@@ -22,16 +22,19 @@ const Login = ({ navigation }) => {
 
       return;
     }
-    if (email === 'admin@gmail.com' || contraseña === 'admin123') {
+    if (email === 'admin@gmail.com' && contraseña === 'admin123') {
       navigation.navigate('MenuAdmin')
+      return;
     }
-    if (email === 'cliente@gmail.com' || contraseña === 'cliente123') {
+    if (email === 'cliente@gmail.com' && contraseña === 'cliente123') {
       navigation.navigate('Inicio')
+      return;
     }
     else {
       Alert.alert('Alerta', 'Contraseña y/o correo incorrecto', [
         { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
       ])
+      return;
 
     }
   }
