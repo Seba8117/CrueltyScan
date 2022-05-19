@@ -58,7 +58,7 @@ const Inicio = ({navigation}) => {
 }
 const styles = StyleSheet.create({
   fondo: {
-    backgroundColor: '#000000',
+    backgroundColor: '#ffff',
     flex:1
 
   },
