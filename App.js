@@ -27,6 +27,7 @@ import MiCuenta from './View/MiCuenta';
 import Favoritos from './View/Favoritos';
 import Adopcion from './View/Adopcion';
 import EscanearCodigo from './View/EscanearCodigo';
+import ResultadoScan from './View/ResultadoScan';
 import Categorias from './View/Categorias';
 import MenuAdmin from './View/MenuAdmin';
 import Maquillaje from './View/Maquillaje';
@@ -241,6 +242,30 @@ const App = () => {
        }}
          
       />
+
+      
+<Stack.Screen
+              name="ResultadoScan"
+              component={ResultadoScan}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+            />
+
+
+
+
+
+
 
       <Stack.Screen 
         name="Categorias"
