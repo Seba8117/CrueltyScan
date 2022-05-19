@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
 
     },
     formulario: {
-        backgroundColor: '#D9D9D8',
+        backgroundColor: '#E5E6E6',
         marginTop: 20,
         marginHorizontal: 40,
 
