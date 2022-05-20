@@ -62,7 +62,7 @@ const App = () => {
           initialRouteName='Login' //Cambiar pagina 
        > 
        <Stack.Screen 
-           name="EliminarProductos"
+           name="EliminarPructos"
            component={EliminarProductos}
            options={{
             title:'Crueltly Scan',
