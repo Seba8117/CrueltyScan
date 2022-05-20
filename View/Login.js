@@ -58,7 +58,7 @@ const Login = ({ navigation }) => {
 
   return (
 
-    <View >
+    <View style={styles.centro}>
       <Image style={styles.logo}
         source={require('../assets/IMG/Logo.png')}
 
@@ -132,6 +132,10 @@ const styles = StyleSheet.create({
 
 
   },
+  centro:{
+    textAlign:'center',
+    alignItems:'center'
+  },
 
 
   logo: {
@@ -148,11 +152,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 50,
     marginTop: 50,
     borderRadius: 5,
-   
     fontSize: 20,
     borderColor: '#0F0E0E',
     borderWidth: 1,
+    width: 260,
     height: 50,
+    
 
   },
 
@@ -185,6 +190,8 @@ const styles = StyleSheet.create({
     borderColor: '#0F0E0E',
     borderWidth: 1,
     marginHorizontal: 50,
+    width: 260,
+    height: 50,
 
   },
 
