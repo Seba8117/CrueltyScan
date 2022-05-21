@@ -1,21 +1,21 @@
 import 'react-native-gesture-handler';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
-  View, 
-  Text, 
+  View,
+  Text,
   StyleSheet,
   Image,
-  Modal, 
-  Pressable, 
-  Button, 
-  useColorScheme, 
+  Modal,
+  Pressable,
+  Button,
+  useColorScheme,
   SafeAreaView
 } from 'react-native';
 
 //React Navigation
-import {NavigationContainer} from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack';
-import {Provider as PaperProvider} from 'react-native-paper';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 //Importar Componentes
 import Login from './View/Login';
@@ -53,198 +53,199 @@ import EliminarProductos from './View/EliminarProductos';
 const Stack = createStackNavigator();
 
 const App = () => {
- 
+
 
   return (
-   <>
-   <PaperProvider>
-     <NavigationContainer> 
-       <Stack.Navigator
-          initialRouteName='Login' //Cambiar pagina 
-       > 
-       <Stack.Screen 
-           name="EliminarPructos"
-           component={EliminarProductos}
-           options={{
-            title:'Crueltly Scan',
-            headerTitleAlign:'center',
-            padding: 50,
-            headerStyle:{
-              backgroundColor:'#c1f4c5'
-              
-            },
-            headerTintColor:'#0F0E0E',
-            headerTitleStyle:{
-              fontWeight:'bold'
-            }   
-          }}
-
+    <>
+      <PaperProvider>
+        <NavigationContainer>
           
+          <Stack.Navigator
+            initialRouteName='Login' //Cambiar pagina 
+          >
+            <Stack.Screen
+              name="EliminarPructos"
+              component={EliminarProductos}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                padding: 50,
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
 
-         />
-
-     
-       <Stack.Screen 
-           name="RegistroProducto"
-           component={RegistroProducto}
-           options={{
-            title:'Admin',
-            headerTitleAlign:'center',
-            headerTitleStyle:{
-              fontWeight:'bold'
-            }   
-          }}
-         />
-
-         <Stack.Screen 
-           name="Login"
-           component={Login}
-           options={{
-            title:'Crueltly Scan',
-            headerTitleAlign:'center',
-            headerTitleStyle:{
-              fontWeight:'bold'
-            }   
-          }}
-         />
-         <Stack.Screen 
-           name="BuscarMarcaAdmin"
-           component={BuscarMarcaAdmin}
-           options={{
-            title:'Admin',
-            headerTitleAlign:'center',
-            headerTitleStyle:{
-              fontWeight:'bold'
-            }   
-          }}
-         />
-
-          <Stack.Screen 
-           name="CrearCuenta"
-           component={CrearCuenta}
-           options={{
-            title:'Crueltly Scan',
-            headerTitleAlign:'center',
-            padding: 50,
-            headerStyle:{
-              backgroundColor:'#c1f4c5'
-              
-            },
-            headerTintColor:'#0F0E0E',
-            headerTitleStyle:{
-              fontWeight:'bold'
-            }   
-          }}
-
-          
-
-         />
-
-        <Stack.Screen 
-           name="RecupContr"
-           component={RecupContr}
-           options={{
-            title:'Crueltly Scan',
-            headerTitleAlign:'center',
-            headerStyle:{
-              backgroundColor:'#c1f4c5'
-            },
-            headerTintColor:'#0F0E0E',
-            headerTitleStyle:{
-              fontWeight:'bold'
-            }
-          }}
-          />
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
 
 
-        <Stack.Screen 
-           name="Inicio"
-           component={Inicio}
-           options={{
-            title:'Crueltly Scan',
-            headerTitleAlign:'center',
-            headerStyle:{
-              backgroundColor:'#c1f4c5'
-            },
-            headerTintColor:'#0F0E0E',
-            headerTitleStyle:{
-              fontWeight:'bold'
-            }
-          }}
 
-         />    
-         
-            
-        <Stack.Screen 
-        name="MiCuenta"
-        component={MiCuenta}
-        options={{
-         title:'Crueltly Scan',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
-         
-      />
+            />
 
-     <Stack.Screen 
-        name="Favoritos"
-        component={Favoritos}
-        options={{
-         title:'Crueltly Scan',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
-         
-      />
 
-      <Stack.Screen 
-        name="Adopcion"
-        component={Adopcion}
-        options={{
-         title:'Crueltly Scan',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
-         
-      />
+            <Stack.Screen
+              name="RegistroProducto"
+              component={RegistroProducto}
+              options={{
+                title: 'Admin',
+                headerTitleAlign: 'center',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+            />
 
-      <Stack.Screen 
-        name="EscanearCodigo"
-        component={EscanearCodigo}
-        options={{
-         title:'Crueltly Scan',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
-         
-      />
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+            />
+            <Stack.Screen
+              name="BuscarMarcaAdmin"
+              component={BuscarMarcaAdmin}
+              options={{
+                title: 'Admin',
+                headerTitleAlign: 'center',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+            />
 
-      
-<Stack.Screen
+            <Stack.Screen
+              name="CrearCuenta"
+              component={CrearCuenta}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                padding: 50,
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+
+
+            />
+
+            <Stack.Screen
+              name="RecupContr"
+              component={RecupContr}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+            />
+
+
+            <Stack.Screen
+              name="Inicio"
+              component={Inicio}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+            />
+
+
+            <Stack.Screen
+              name="MiCuenta"
+              component={MiCuenta}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+            />
+
+            <Stack.Screen
+              name="Favoritos"
+              component={Favoritos}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+            />
+
+            <Stack.Screen
+              name="Adopcion"
+              component={Adopcion}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+            />
+
+            <Stack.Screen
+              name="EscanearCodigo"
+              component={EscanearCodigo}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+            />
+
+
+            <Stack.Screen
               name="ResultadoScan"
               component={ResultadoScan}
               options={{
@@ -267,223 +268,223 @@ const App = () => {
 
 
 
-      <Stack.Screen 
-        name="Categorias"
-        component={Categorias}
-        options={{
-         title:'Crueltly Scan',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
-         
-      />
+            <Stack.Screen
+              name="Categorias"
+              component={Categorias}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
 
-     <Stack.Screen 
-        name="MenuAdmin"
-        component={MenuAdmin}
-        options={{
-          title:'Admin',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
-         
-      />
+            />
 
-      
-      <Stack.Screen 
-        name="Maquillaje"
-        component={Maquillaje}
-        options={{
-         title:'Crueltly Scan',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
-         
-      />
+            <Stack.Screen
+              name="MenuAdmin"
+              component={MenuAdmin}
+              options={{
+                title: 'Admin',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
 
-      <Stack.Screen 
-        name="CuidadoCapilar"
-        component={CuidadoCapilar}
-        options={{
-         title:'Crueltly Scan',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
-         
-      />
-      <Stack.Screen 
-        name="ArticulosHigiene"
-        component={ArticulosHigiene}
-        options={{
-         title:'Crueltly Scan',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
-         
-      />
+            />
 
-      
-      <Stack.Screen 
-        name="CuidadoPersonal"
-        component={CuidadoPersonal}
-        options={{
-         title:'Crueltly Scan',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
-         
-      />
 
-       <Stack.Screen 
-        name="RegistroRescatado"
-        component={RegistroRescatado}
-        options={{
-         title:'Crueltly Scan',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
+            <Stack.Screen
+              name="Maquillaje"
+              component={Maquillaje}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
 
-       
-         
-      />
+            />
 
-      <Stack.Screen 
-        name="MenuAdopcion"
-        component={MenuAdopcion}
-        options={{
-         title:'Crueltly Scan',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
-         
-      />
+            <Stack.Screen
+              name="CuidadoCapilar"
+              component={CuidadoCapilar}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
 
-      <Stack.Screen 
-        name="RegistroMarca"
-        component={RegistroMarca}
-        options={{
-          title:'Admin',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
-         
-      />
-      
+            />
+            <Stack.Screen
+              name="ArticulosHigiene"
+              component={ArticulosHigiene}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
 
-      <Stack.Screen 
-        name="EliminarMarcas"
-        component={EliminarMarcas}
-        options={{
-          title:'Admin',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
-         
-      />
+            />
 
-       <Stack.Screen 
-        name="ListadoRescatados"
-        component={ListadoRescatados}
-        options={{
-          title:'Admin',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
-         
-      />
 
-<Stack.Screen 
-        name="ModificarRescatado"
-        component={ModificarRescatado}
-        options={{
-          title:'Admin',
-         headerTitleAlign:'center',
-         headerStyle:{
-           backgroundColor:'#c1f4c5'
-         },
-         headerTintColor:'#0F0E0E',
-         headerTitleStyle:{
-           fontWeight:'bold'
-         }
-       }}
-         
-      />
+            <Stack.Screen
+              name="CuidadoPersonal"
+              component={CuidadoPersonal}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
 
-       </Stack.Navigator>
-     </NavigationContainer> 
-     </PaperProvider>
-   </>
+            />
+
+            <Stack.Screen
+              name="RegistroRescatado"
+              component={RegistroRescatado}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+
+
+            />
+
+            <Stack.Screen
+              name="MenuAdopcion"
+              component={MenuAdopcion}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+            />
+
+            <Stack.Screen
+              name="RegistroMarca"
+              component={RegistroMarca}
+              options={{
+                title: 'Admin',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+            />
+
+
+            <Stack.Screen
+              name="EliminarMarcas"
+              component={EliminarMarcas}
+              options={{
+                title: 'Admin',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+            />
+
+            <Stack.Screen
+              name="ListadoRescatados"
+              component={ListadoRescatados}
+              options={{
+                title: 'Admin',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+            />
+
+            <Stack.Screen
+              name="ModificarRescatado"
+              component={ModificarRescatado}
+              options={{
+                title: 'Admin',
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+            />
+
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  
+
 });
 
 export default App;

@@ -16,7 +16,8 @@ const ResultadoScan = () => {
 
             <View style={styles.resultado}>
                 <Image style={styles.imageResult}
-                    source={require('../assets/IMG/garnier.png')} />
+                    // source={require('../assets/IMG/garnier.png')} 
+                    />
 
                 <View style={styles.contenedorTexto}>
                     <Text style={styles.textoMarca}>Marca de producto</Text>
