@@ -1,6 +1,20 @@
 import React from 'react'
-import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView } from 'react-native'
+import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView,Image,Alert } from 'react-native'
 const ModificarRescastado = ({ navigation }) => {
+    const Modificar = () => {
+        Alert.alert('Alerta', 'Se ha Modificado la publicacion', [
+          { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+        ])
+        navigation.navigate('MenuAdmin')
+    }
+    const eliminar = () => {
+        Alert.alert('Alerta', 'Publicacion eliminada', [
+            { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+        ])
+        navigation.navigate('MenuAdmin')
+
+    }
+
 
     return (
         <ScrollView>
@@ -27,12 +41,16 @@ const ModificarRescastado = ({ navigation }) => {
                 <TextInput placeholder='Ingrese edad' keyboardType='number-pad' placeholderTextColor={'#666'} style={styles.input} value="3"/>
 
                 <Text style={styles.letras}>Foto:</Text>
-                <TextInput   type='file' placeholder='Seleccione Imagen' placeholderTextColor={'#666'} style={styles.input} />
-
-            </View>
-            <Pressable style={styles.boton} >
+                <Image style={styles.foto} source={require('../assets/IMG/adopta2.jpg')} />
+                <Pressable style={styles.boton} onPress={() => Modificar()}>
                 <Text style={styles.textoboton} >Modificar</Text>
             </Pressable>
+            <Pressable style={styles.botoneliminar} onPress={() => eliminar()}>
+                <Text style={styles.textoboton} >ELiminar</Text>
+            </Pressable>
+
+            </View>
+           
 
         </ScrollView>
 
@@ -43,6 +61,18 @@ const ModificarRescastado = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+    btnEliminar: {
+        marginVertical: 14,
+        backgroundColor: '#FF3939',
+        marginTop: 10,
+        borderRadius: 5,
+        fontSize: 24,
+        borderColor: '#0F0E0E',
+        borderWidth: 1,
+        width: 160,
+        height: 40,
+    
+      },
     fondoresto:{
         backgroundColor:'#FFF'
     },
@@ -60,6 +90,13 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         marginHorizontal: 20
 
+    },
+    foto: {
+        height: 190,
+        width: 190,
+        marginTop: 30,
+        marginHorizontal: 70,
+        marginVertical: 20
     },
  
     input: {
@@ -79,6 +116,20 @@ const styles = StyleSheet.create({
         backgroundColor: '#D9D7F1',
         padding: 15,
         marginTop: 20,
+        marginHorizontal: 60,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#000000',
+        marginVertical: 40
+
+
+
+
+    },
+    botoneliminar: {
+        backgroundColor: '#FF3939',
+        padding: 15,
+        marginTop: -20,
         marginHorizontal: 60,
         borderRadius: 10,
         borderWidth: 1,

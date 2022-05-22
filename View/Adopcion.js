@@ -1,48 +1,80 @@
 import React, { useState } from 'react'
-import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView } from 'react-native';
-import { Headline, Paragraph, Dialog, Portal, Menu, Searchbar } from 'react-native-paper';
+import { Image, View, StyleSheet, ScrollView, Text, Pressable, Alert } from 'react-native';
+import { TextInput, Headline, Button, Paragraph, Dialog, Title, Menu, Card } from 'react-native-paper';
 import { AdornmentSide } from 'react-native-paper/lib/typescript/components/TextInput/Adornment/enums';
 import globalStyles from '../style/global';
 
 
 const Adopcion = () => {
     return (
-        <ScrollView >
-            <View style={styles.fondo} >
-                <Text style={styles.titulo}>Cruelty Scan</Text>
-                <Text style={styles.texto}>Listado de Mascotas </Text>
-            </View>
-            <View>
+        <ScrollView>
+            <Card>
+                <Card.Content style={styles.carta} >
+                    <Image style={styles.foto} source={require('../assets/IMG/adopta1.jpg')} />
+                    <Paragraph style={styles.letras}>Nombre: sin asignar</Paragraph>
+                    <Paragraph style={styles.letras}>Color: Café</Paragraph>
+                    <Paragraph style={styles.letras}>Tamaño: Pequeño</Paragraph>
+                    <Paragraph style={styles.letras}>Edad: 3 meses aprox</Paragraph>
+                    <View style={styles.letraultima} >
+                        <Title style={styles.letras} >Contacto</Title>
+                        <Paragraph style={styles.letras}>Celular contacto: +56950093679</Paragraph>
+                        <Paragraph style={styles.letras}>Telefono: 229316092</Paragraph>
+                    </View>
 
+                </Card.Content>
+                <Card.Content style={styles.carta} >
+                    <Image style={styles.foto} source={require('../assets/IMG/adopta2.jpg')} />
+                    <Paragraph style={styles.letras}>Nombre: sin asignar</Paragraph>
+                    <Paragraph style={styles.letras}>Color: Café</Paragraph>
+                    <Paragraph style={styles.letras}>Tamaño: Mediano</Paragraph>
+                    <Paragraph style={styles.letras}>Edad: 2 años</Paragraph>
+                    <View style={styles.letraultima} >
+                        <Title style={styles.letras} >Contacto</Title>
+                        <Paragraph style={styles.letras}>Celular contacto: +56995374558 </Paragraph>
+                        <Paragraph style={styles.letras}>Telefono: 225545080</Paragraph>
+                    </View>
 
-
-            </View>
-
+                </Card.Content>
+            </Card>
         </ScrollView>
+
+
+
     )
 }
 
+
 const styles = StyleSheet.create({
-    texto: {
-        color: '#000000',
-        marginTop: 20,
-        fontSize: 18,
-        textAlign: 'center',
-        marginVertical: 40
+    foto: {
+        height: 190,
+        width: 190,
+        marginTop: 30,
+        marginHorizontal: 70,
+        marginVertical: 20
+    },
+    carta: {
+        backgroundColor: '#E5E6E6',
+        borderWidth: 1,
+        borderColor: '#000000',
 
     },
-    titulo: {
-        marginTop: 50,
-        textAlign: 'center',
-        fontSize: 25,
+    letras: {
         color: '#000000',
-    },
-    fondo: {
-        backgroundColor: '#cee5d0',
-        flex: 1,
+        textAlign: 'center',
 
     },
-    
+
+    btnAgregar: {
+        marginHorizontal: 30,
+        marginVertical: 10
+    },
+    letraultima: {
+        color: '#000000',
+        textAlign: 'center',
+        marginVertical:20
+
+    },
+
 
 
 })

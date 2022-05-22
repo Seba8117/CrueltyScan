@@ -25,10 +25,35 @@ const Categorias = ({navigation}) => {
   return (
 
     <View style={{ flex: 1 }}>
-      <Menu.Item icon={require('../assets/IMG/maquillaje.png')} onPress={() => {maquillajeyBelleza()}} title="Maquillaje y Belleza" />
-      <Menu.Item icon={require('../assets/IMG/cepillo.png')} onPress={() => {cuidadoCapilar()}} title="Cuidado Capilar" />
-      <Menu.Item icon={require('../assets/IMG/articulos.png')} onPress={() => {articulosHigiene()}} title="Articulos de Higiene"  />
-      <Menu.Item icon={require('../assets/IMG/personal.png')} onPress={() => {cuidadoPersonal()}} title="Cuidado Personal"  />
+      <Menu.Item icon={require('../assets/IMG/maquillaje.png')} onPress={() => {maquillajeyBelleza()}} title="Maquillaje y Belleza" 
+      theme={{
+        colors: {
+          text: '#000000',
+        }
+      }}
+      />
+      
+      <Menu.Item icon={require('../assets/IMG/cepillo.png')} onPress={() => {cuidadoCapilar()}} title="Cuidado Capilar" 
+      theme={{
+        colors: {
+          text: '#000000',
+        }
+      }}/>
+      
+      <Menu.Item icon={require('../assets/IMG/articulos.png')} onPress={() => {articulosHigiene()}} title="Articulos de Higiene"  
+      theme={{
+        colors: {
+          text: '#000000',
+        }
+      }}/>
+     
+      <Menu.Item icon={require('../assets/IMG/personal.png')} onPress={() => {cuidadoPersonal()}} title="Cuidado Personal"  
+      theme={{
+        colors: {
+          text: '#000000',
+        }
+      }}/>
+    
     </View>
   
   )

@@ -16,12 +16,12 @@ const ResultadoScan = () => {
 
             <View style={styles.resultado}>
                 <Image style={styles.imageResult}
-                    // source={require('../assets/IMG/garnier.png')} 
+                    source={require('../assets/IMG/GarnierLogo.png')} 
                     />
 
                 <View style={styles.contenedorTexto}>
-                    <Text style={styles.textoMarca}>Marca de producto</Text>
-                    <Text style={styles.textoProducto}>Nombre de producto</Text>
+                    <Text style={styles.textoMarca}>Garnier</Text>
+                    <Text style={styles.textoProducto}>Shampoo</Text>
                 </View>
             </View>
 
@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
 
     resultado: {
         marginTop: 70,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginHorizontal:20
     },
 
     imageResult: {
@@ -72,11 +73,13 @@ const styles = StyleSheet.create({
     textoMarca: {
         fontWeight: '900',
         fontSize: 20,
-        marginBottom: 5
+        marginBottom: 5,
+        color:'#000000'
 
     },
     textoProducto: {
-        fontSize: 20
+        fontSize: 20,
+        color:'#000000'
 
     },
     textoFondo: {

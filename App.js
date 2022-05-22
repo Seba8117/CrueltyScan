@@ -43,6 +43,7 @@ import ModificarRescatado from './View/ModificarRescatado';
 import BuscarMarcaAdmin from './View/BuscarMarcaAdmin';
 import RegistroProducto from './View/RegistroProducto';
 import EliminarProductos from './View/EliminarProductos';
+import Buscamarca from './View/Buscamarca';
 
 
 
@@ -64,7 +65,27 @@ const App = () => {
             initialRouteName='Login' //Cambiar pagina 
           >
             <Stack.Screen
-              name="EliminarPructos"
+              name="Buscamarca"
+              component={Buscamarca}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                padding: 50,
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+
+
+            />
+            <Stack.Screen
+              name="EliminarProductos"
               component={EliminarProductos}
               options={{
                 title: 'Crueltly Scan',
