@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView,Alert } from 'react-native';
 import { TextInput, Headline, Button, Paragraph, Dialog, Portal } from 'react-native-paper';
 import { color } from 'react-native-reanimated';
 import globalStyles from '../style/global';
 
-const MiCuenta = () => {
+const MiCuenta = ({ navigation }) => {
 
   //Campos formulario
   const [nombre, guardarNombre] = useState('Cliente');
@@ -26,8 +26,21 @@ const MiCuenta = () => {
       contraseña === '' || telefono === '' || direccion === ''
       || region === '' || comuna === '') {
       //  guardarAlerta(true)
+      Alert.alert('Alerta', 'Hay campos vacios', [
+        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+      ])
+
       return;
     }
+    else{
+      Alert.alert('Alerta', 'Se ha modificado su perfil', [
+        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+      ])
+      navigation.navigate('Inicio')
+      return;
+
+    }
+    
 
     //Generar Registro 
     const registro = { nombre, apellido, email, contraseña, telefono, direccion, region, comuna };
