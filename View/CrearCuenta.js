@@ -56,8 +56,8 @@ const CrearCuenta = ({navigation}) => {
 
 
   return (
-    <ScrollView>
-      <View style={globalStyles.contenedor}>
+    <ScrollView >
+      <View style={globalStyles.centro}>
         <Headline style={globalStyles.titulo}> Registro</Headline>
        
 
@@ -143,6 +143,10 @@ const CrearCuenta = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+  centro: {
+    textAlign: 'center',
+    alignItems: 'center',
+},
   input: {
     backgroundColor: '#FFF',
     // borderRadius: 20,

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView,Image } from 'react-native'
+import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView, Image } from 'react-native'
 const MenuAdopcion = ({ navigation }) => {
 
   const visitarRegistroRescatado = () => {
@@ -12,8 +12,9 @@ const MenuAdopcion = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.fondo} >
       <Text style={styles.colorLetra}>Adopción</Text>
-
-      <Image style={styles.logo} source={require('../assets/IMG/adopción.png')}/>
+      <View style={styles.centro}>
+        <Image style={styles.logo} source={require('../assets/IMG/adopción.png')} />
+      </View>
 
       <Pressable style={styles.boton} onPress={() => visitarAdopcion()}    >
         <Text style={styles.textoboton} >Adopta</Text>
@@ -38,6 +39,10 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: '#000000',
     //fontFamily:'cursive'
+  },
+  centro:{
+    textAlign:'center',
+    alignItems:'center',
   },
 
   logo: {

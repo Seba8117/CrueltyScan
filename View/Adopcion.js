@@ -10,7 +10,9 @@ const Adopcion = () => {
         <ScrollView>
             <Card>
                 <Card.Content style={styles.carta} >
-                    <Image style={styles.foto} source={require('../assets/IMG/adopta1.jpg')} />
+                    <View style={styles.centro} >
+                        <Image style={styles.foto} source={require('../assets/IMG/adopta1.jpg')} />
+                    </View>
                     <Paragraph style={styles.letras}>Nombre: sin asignar</Paragraph>
                     <Paragraph style={styles.letras}>Color: Café</Paragraph>
                     <Paragraph style={styles.letras}>Tamaño: Pequeño</Paragraph>
@@ -23,7 +25,9 @@ const Adopcion = () => {
 
                 </Card.Content>
                 <Card.Content style={styles.carta} >
-                    <Image style={styles.foto} source={require('../assets/IMG/adopta2.jpg')} />
+                    <View style={styles.centro} >
+                        <Image style={styles.foto} source={require('../assets/IMG/adopta2.jpg')} />
+                    </View>
                     <Paragraph style={styles.letras}>Nombre: sin asignar</Paragraph>
                     <Paragraph style={styles.letras}>Color: Café</Paragraph>
                     <Paragraph style={styles.letras}>Tamaño: Mediano</Paragraph>
@@ -63,6 +67,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
 
     },
+    centro: {
+        textAlign: 'center',
+        alignItems: 'center',
+    },
 
     btnAgregar: {
         marginHorizontal: 30,
@@ -71,7 +79,7 @@ const styles = StyleSheet.create({
     letraultima: {
         color: '#000000',
         textAlign: 'center',
-        marginVertical:20
+        marginVertical: 20
 
     },
 
