@@ -29,6 +29,9 @@ const Inicio = ({ navigation }) => {
   const Buscamarca = () => {
     navigation.navigate('Buscamarca')
   }
+  const Salir = () => {
+    navigation.navigate('Login')
+  }
 
 
 
@@ -85,6 +88,12 @@ const Inicio = ({ navigation }) => {
             }
           }} />
         <Menu.Item icon={require('../assets/IMG/micuenta.png')} onPress={() => { editarCuenta() }} title="Mi Cuenta"
+          theme={{
+            colors: {
+              text: '#000000',
+            }
+          }} />
+        <Menu.Item icon={require('../assets/IMG/salir.png')} onPress={() => { Salir() }} title="Cerrar sesión"
           theme={{
             colors: {
               text: '#000000',

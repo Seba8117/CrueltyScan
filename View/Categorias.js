@@ -24,7 +24,7 @@ const Categorias = ({navigation}) => {
       
   return (
 
-    <View style={{ flex: 1 }}>
+    <View style={styles.fondo}>
       <Menu.Item icon={require('../assets/IMG/maquillaje.png')} onPress={() => {maquillajeyBelleza()}} title="Maquillaje y Belleza" 
       theme={{
         colors: {
@@ -58,5 +58,14 @@ const Categorias = ({navigation}) => {
   
   )
 }
+const styles = StyleSheet.create({
+
+  fondo: {
+    backgroundColor: 'transparent',
+    flex: 1,
+
+  },
+
+});
 
 export default Categorias

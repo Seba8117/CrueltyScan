@@ -174,6 +174,8 @@ const styles = StyleSheet.create({
     width: 260,
     height: 50,
     marginTop: 10,
+    borderRadius: 8,
+    borderWidth: 1,
 
   },
 
@@ -192,6 +194,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 50,
     width: 260,
     height: 50,
+    borderRadius: 8,
+    borderWidth: 1,
 
   },
 

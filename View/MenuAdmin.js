@@ -19,8 +19,8 @@ const MenuAdmin = ({ navigation }) => {
     const visitarRegistroProducto = () => {
         navigation.navigate('RegistroProducto')
     }
-    const visitarEliminarProductos = () => {
-        navigation.navigate('EliminarProductos')
+    const visitarCerrarSesion = () => {
+        navigation.navigate('Login')
     }
     
     
@@ -47,12 +47,14 @@ const MenuAdmin = ({ navigation }) => {
                 <Pressable style={styles.boton2} onPress={() => visitarRegistroProducto()}>
                     <Text style={styles.textoboton2}  > Registrar Productos</Text>
                 </Pressable>
-                <Pressable style={styles.boton2} onPress={() => visitarEliminarProductos()} >
-                    <Text style={styles.textoboton2} >Eliminar Productos</Text>
-                </Pressable>
+               
 
                 <Pressable style={styles.boton2} onPress={() => visitarListadoRescatados()} >
                     <Text style={styles.textoboton2} >Administrar Adopciones</Text>
+                </Pressable>
+                
+                <Pressable  style={styles.botoncerrar} onPress={() => visitarCerrarSesion()}>
+                    <Text  style={styles.textoboton2} >Cerrar sesión</Text>
                 </Pressable>
                 
 
@@ -73,6 +75,19 @@ const MenuAdmin = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+    botoncerrar: {
+        backgroundColor: '#D9D7F1',
+        padding: 15,
+        marginTop: 20,
+        marginHorizontal: 60,
+        borderRadius: 10,
+        borderWidth: 1,
+       
+
+
+
+
+    },
     titulo: {
         marginTop: 50,
         textAlign: 'center',
