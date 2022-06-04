@@ -23,6 +23,12 @@ const CrearCuenta = ({ navigation }) => {
       { label: 'Conchali', value: 'Conchali' },
       { label: 'Renca', value: 'Renca' }
     ]);
+    const [abrir, setAbrir] = useState(false);
+    const [valor, setValor] = useState(null);
+    const [item, setItem] = useState([
+      { label: 'Metropolitana', value: 'Metropolitana' },
+      { label: 'Los Lagos', value: 'LosLagos' }
+    ]);
 
 
 
@@ -64,7 +70,7 @@ const CrearCuenta = ({ navigation }) => {
 
 
   return (
-    <ScrollView >
+    <ScrollView>
       <View style={globalStyles.centro}>
         <Headline style={globalStyles.titulo}> Registro</Headline>
 
@@ -120,14 +126,17 @@ const CrearCuenta = ({ navigation }) => {
           placeholderTextColor={'#666'}
 
         />
-
-
-        <TextInput
-          onChangeText={texto => guardarRegión(texto)}
-          value={region}
-          style={styles.input}
+        
+        <DropDownPicker
           placeholder='Region'
           placeholderTextColor={'#666'}
+          style={styles.input}
+          open={abrir}
+          value={valor}
+          items={item}
+          setValue={setValor}
+          setItems={setItem}
+          setOpen={setAbrir}
         />
 
 
