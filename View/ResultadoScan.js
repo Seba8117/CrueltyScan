@@ -1,36 +1,71 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, ScrollView, Text, Image } from 'react-native';
 import { TextInput, Headline, Button, Paragraph, Dialog, Title, Menu, Card } from 'react-native-paper';
 import { AdornmentSide } from 'react-native-paper/lib/typescript/components/TextInput/Adornment/enums';
 import globalStyles from '../style/global';
 
 
-const ResultadoScan = () => {
+const ResultadoScan = ({ route, navigation }) => {
+    const { barcode } = route.params;
+    const [data, setData] = useState({})
+
+    useEffect(() => {
+        const buscarProducto = async () => {
+            const requestOptions = {
+                method: 'GET',
+                redirect: 'follow'
+            };
+            let respuesta
+            try {
+                respuesta = await fetch(`http://192.168.18.203:3000/api/productos/${barcode}`, requestOptions)
+            } catch (error) {
+                console.log(error)
+            }
+            const body = await respuesta.json();
+            setData(body[0])
+        }
+
+        buscarProducto()
+        console.log(data)
+    }, [])
+    console.log(data)
     return (
         <View>
-            <View style={styles.container}>
-                <Image style={styles.logoLibre}
-                    source={require('../assets/IMG/libre.png')} />
-            </View>
-
+            {
+                data.test === 0 && <View style={styles.container}>
+                    <Image style={styles.logoLibre}
+                        source={require('../assets/IMG/crueldad.png')} />
+                </View>
+            }
+            {
+                data.test === 1 && <View style={styles.container}>
+                    <Image style={styles.logoLibre}
+                        source={require('../assets/IMG/libre.png')} />
+                </View>
+            }
 
             <View style={styles.resultado}>
                 <Image style={styles.imageResult}
-                    source={require('../assets/IMG/GarnierLogo.png')} 
-                    />
+                    source={require('../assets/IMG/GarnierLogo.png')}
+                />
 
                 <View style={styles.contenedorTexto}>
-                    <Text style={styles.textoMarca}>Garnier</Text>
-                    <Text style={styles.textoProducto}>Shampoo</Text>
+                    <Text style={styles.textoMarca}>{data.nom_marca}</Text>
+                    <Text style={styles.textoProducto}>{data.nom_producto}</Text>
                 </View>
             </View>
 
+            {
+                data.test === 0 && <View style={styles.fondoColorTesteo}>
+                    <Text style={styles.textoFondoTesteo}>Esta marca testea en animales!!</Text>
+                </View>
+            }
 
-            <View style={styles.fondoColor}>
-                <Text style={styles.textoFondo}>Esta marca es libre de crueldad animal! No prueba en animales</Text>
-            </View>
-
-
+            {
+                data.test === 1 && <View style={styles.fondoColorNoTesteo}>
+                    <Text style={styles.textoFondoNoTesteo}>Esta marca es libre de crueldad animal! No prueba en animales</Text>
+                </View>
+            }
         </View>
     );
 };
@@ -58,7 +93,7 @@ const styles = StyleSheet.create({
     resultado: {
         marginTop: 70,
         flexDirection: 'row',
-        marginHorizontal:20
+        marginHorizontal: 20
     },
 
     imageResult: {
@@ -74,26 +109,34 @@ const styles = StyleSheet.create({
         fontWeight: '900',
         fontSize: 20,
         marginBottom: 5,
-        color:'#000000'
+        color: '#000000'
 
     },
     textoProducto: {
         fontSize: 20,
-        color:'#000000'
-
+        color: '#000000'
     },
-    textoFondo: {
+    textoFondoNoTesteo: {
+        fontWeight: '600',
+        marginHorizontal: 10
+    },
+    textoFondoTesteo: {
         fontWeight: '800',
+        color: '#fff',
         marginHorizontal: 10
 
     },
-    fondoColor: {
+    fondoColorNoTesteo: {
         backgroundColor: '#8fea5b',
         paddingVertical: 10,
         marginHorizontal: 20,
         borderRadius: 10
-
-
+    },
+    fondoColorTesteo: {
+        backgroundColor: 'red',
+        paddingVertical: 10,
+        marginHorizontal: 20,
+        borderRadius: 10
     },
 })
 export default ResultadoScan
