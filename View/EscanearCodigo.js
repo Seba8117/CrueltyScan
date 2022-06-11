@@ -10,9 +10,9 @@ import globalStyles from '../style/global';
 const EscanearCodigo = ({ navigation }) => {
 
   onBarCodeRead = (scanResult) => {
-    console.log(scanResult.data)
-    navigation.navigate('ResultadoScan')
-    // llamar a la bd para traer la informacion pasandole el scanResult.data
+    navigation.navigate('ResultadoScan', {
+      barcode: scanResult.data
+    })
   }
 
   return (

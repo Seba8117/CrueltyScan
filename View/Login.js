@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import {TextInput, View, StyleSheet, Image, ScrollView, Alert } from 'react-native';
-import {  Headline, Button, Paragraph, Dialog, Portal } from 'react-native-paper';
+import { TextInput, View, StyleSheet, Image, ScrollView, Alert } from 'react-native';
+import { Headline, Button, Paragraph, Dialog, Portal } from 'react-native-paper';
 import { color } from 'react-native-reanimated';
 import globalStyles from '../style/global';
 
@@ -9,52 +9,64 @@ const Login = ({ navigation }) => {
 
   //Campos formulario
   const [email, guardarEmail] = useState('');
-  const [contraseña, guardarContraseña] = useState('');
+  const [contrasena, guardarContrasena] = useState('');
 
 
   //Almacena al usuario en la base de datos 
-  const inicioSesionUsuario = () => {
-
-    if (email === '' || contraseña === '') {
+  const inicioSesionUsuario = async () => {
+    if (email === '' || contrasena === '') {
       Alert.alert('Alerta', 'Contraseña y/o correo vacio', [
         { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
       ])
 
       return;
     }
-    if (email === 'admin@gmail.com' && contraseña === 'admin123') {
-      navigation.navigate('MenuAdmin')
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "correo": email,
+        "contra": contrasena
+      })
+    };
+
+    let respuesta = ''
+    try {
+      respuesta = await fetch("http://192.168.18.203:3000/api/login", requestOptions)
+    } catch (error) {
+      Alert.alert('Alerta', 'Error en el sistema', [
+        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+      ])
       return;
     }
-    if (email === 'cliente@gmail.com' && contraseña === 'cliente123') {
-      navigation.navigate('Inicio')
-      return;
-    }
-    else {
+
+    if (respuesta.status === 200) {
+      const body = await respuesta.json();
+      if (body.tipoUsuario === 1) {
+        navigation.navigate('MenuAdmin')
+        return;
+      } else {
+        navigation.navigate('Inicio')
+        return;
+      }
+    } else {
       Alert.alert('Alerta', 'Contraseña y/o correo incorrecto', [
         { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
       ])
       return;
-
     }
   }
 
-  const olvidasteContraseña = () => {
+  const olvidasteContrasena = () => {
     navigation.navigate('RecupContr')
   }
 
   const crearCuenta = () => {
     navigation.navigate('CrearCuenta')
   }
-
-  //Generar Registro 
-  // const inicioSesionUsu = { email, contraseña};
-
-  //Guardar Usuario
-
-  //Redireccionar
-
-  //Limpiar form 
 
   return (
 
@@ -71,13 +83,6 @@ const Login = ({ navigation }) => {
       </View>
 
       <View >
-        {/* <TextInput
-          style={styles.input}
-          label="Email"
-          mode="outlined"
-          onChangeText={texto => guardarEmail(texto)}
-          value={email}
-        /> */}
         <TextInput
           placeholder='Email'
           placeholderTextColor={'#666'}
@@ -89,15 +94,12 @@ const Login = ({ navigation }) => {
 
         <TextInput
           style={styles.input}
-          onChangeText={texto => guardarContraseña(texto)}
-          value={contraseña}
+          onChangeText={texto => guardarContrasena(texto)}
+          value={contrasena}
           placeholder='Contraseña'
           placeholderTextColor={'#666'}
           textAlign={'center'}
           secureTextEntry={true}
-
-
-
         />
       </View>
 
@@ -108,17 +110,11 @@ const Login = ({ navigation }) => {
       </View>
 
       <View >
-        <Button onPress={() => olvidasteContraseña()}
-          style={styles.btnOlvidasteTuContraseña}
+        <Button onPress={() => olvidasteContrasena()}
+          style={styles.btnOlvidasteTuContrasena}
         > ¿Olvidaste tu contraseña?</Button>
       </View>
-
-
-
-
     </View>
-
-
   )
 }
 
@@ -127,24 +123,18 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     textAlign: "center",
-    // backgroundColor: '#FFF',
     flex: 1,
-
-
   },
-  centro:{
-    textAlign:'center',
-    alignItems:'center'
+  centro: {
+    textAlign: 'center',
+    alignItems: 'center'
   },
-
-
   logo: {
     height: 190,
     width: 190,
     marginTop: 30,
-    marginHorizontal:80
+    marginHorizontal: 80
   },
-
   btnCrearCuenta: {
     marginVertical: 14,
     backgroundColor: '#c1f4c5',
@@ -157,29 +147,21 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 260,
     height: 50,
-    
-
   },
-
- 
   input: {
     backgroundColor: '#FFF',
-    // borderRadius: 20,
     color: '#000000',
     borderWidth: 1,
     borderColor: '#000000',
     marginVertical: 15,
-    marginRight:60,
-    marginLeft:50,
+    marginRight: 60,
+    marginLeft: 50,
     width: 260,
     height: 50,
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
-
   },
-
-
   btnIniciarSesion: {
     marginVertical: 14,
     backgroundColor: '#d9d7f1',
@@ -196,15 +178,11 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 8,
     borderWidth: 1,
-
   },
-
-  btnOlvidasteTuContraseña: {
+  btnOlvidasteTuContrasena: {
     fontSize: 20,
     color: '#0F0E0E'
   }
-
-
 })
 
 export default Login
