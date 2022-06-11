@@ -8,15 +8,22 @@ import DropDownPicker from 'react-native-dropdown-picker';
 const CrearCuenta = ({ navigation }) => {
 
   //Campos formulario
+  const [rut, guardarRut] = useState('');
+  const [id_comuna, guardarIdComuna] = useState(1);
   const [nombre, guardarNombre] = useState('');
   const [apellido, guardarApellido] = useState('');
-  const [email, guardarEmail] = useState('');
-  const [contraseña, guardarContraseña] = useState('');
-  const [telefono, guardarTelefono] = useState('');
-  const [region, guardarRegión] = useState('');
-  const [comuna, guardarComuna] = useState('');
   const [apellidoMaterno, guardarApellidoMaterno] = useState('');
-  //const [alerta, guardarAlerta] = useState('false');
+  const [email, guardarEmail] = useState('');
+  const [telefono, guardarTelefono] = useState('');
+  const [contraseña, guardarContraseña] = useState('');
+
+
+
+
+
+
+
+
   const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
@@ -33,36 +40,52 @@ const CrearCuenta = ({ navigation }) => {
 
 
   //Almacena al usuario en la base de datos 
-  const registrarseUsuario = () => {
+  const registrarseUsuario = async() => {
     
 
     //Validar
-    if (nombre === '' || apellido === '' || email === '' ||
-      contraseña === '' || telefono === '' ||
-      region === '' || comuna === '' || apellidoMaterno === '') {
+    if (rut === '' ||nombre === '' || apellido === '' || email === '' ||
+      contraseña === '' || telefono === ''  || apellidoMaterno === '') {
       Alert.alert('Alerta', 'Hay campos vacios.', [
         { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
       ])
       return;
     }
-    else {
-      Alert.alert('Alerta', 'Registro exitoso.', [
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "rut":rut,
+        "id_comuna": id_comuna, 
+        "nombre_cliente": nombre, 
+        "apellido_pa": apellido, 
+        "apellido_ma": apellidoMaterno, 
+        "correo": email,
+        "celular":telefono,
+        "contra":contraseña
+
+      })
+    };
+    let respuesta = ''
+    try {
+      respuesta = await fetch("https://crueltyscan.azurewebsites.net/api/cliente", requestOptions)
+    } catch (error) {
+      Alert.alert('Alerta', 'Error en el sistema', [
         { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
       ])
-      navigation.navigate('Login')
       return;
-
     }
 
-    //Generar Registro 
-    const registro = { nombre, apellido, email, contraseña, telefono, region, comuna, apellidoMaterno };
-
-    //Guardar Usuario
-
-    //Redireccionar
-
-    //Limpiar form 
-
+    if (respuesta.status === 200) {
+        navigation.navigate('Login')
+        Alert.alert('Alerta', 'Se registro usuario', [
+          { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+        ])
+        return;
+      }
+    
 
   }
 
@@ -74,6 +97,14 @@ const CrearCuenta = ({ navigation }) => {
       <View style={globalStyles.centro}>
         <Headline style={globalStyles.titulo}> Registro</Headline>
 
+        <TextInput
+          placeholder='Rut'
+          placeholderTextColor={'#666'}
+          style={styles.input}
+          onChangeText={texto => guardarRut(texto)}
+          value={rut}
+
+        />
 
         <TextInput
           placeholder='Nombre'

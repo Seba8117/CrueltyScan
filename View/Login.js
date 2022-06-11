@@ -35,7 +35,7 @@ const Login = ({ navigation }) => {
 
     let respuesta = ''
     try {
-      respuesta = await fetch("http://192.168.18.203:3000/api/login", requestOptions)
+      respuesta = await fetch("https://crueltyscan.azurewebsites.net/api/login", requestOptions)
     } catch (error) {
       Alert.alert('Alerta', 'Error en el sistema', [
         { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
