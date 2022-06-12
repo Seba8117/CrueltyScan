@@ -3,25 +3,49 @@ import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaVi
 
 const RegistroMarca = ({ navigation }) => {
     // Campos formulario
-    const [idMarca, guardarIdMarca] = useState('');
     const [nombreMarca, guardarNombreMarca] = useState('');
     const [descripcion, guardarDescripcion] = useState('');
+ 
   
 
-    const registrarMarca = () => {
-        if (idMarca === '' || nombreMarca === '' || descripcion === '' ) {
+    const registrarMarca  = async () => {
+        if (nombreMarca === ''  ) {
             Alert.alert('Alerta', 'Hay campos vacios.', [
                 { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
             ])
             return;
         }
-        else{
-            Alert.alert('Alerta', 'Se registró la marca correctamente.', [
-                { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+        
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              "nom_marca":nombreMarca,
+              "descripcion": descripcion, 
+        
+              
+      
+            })
+          };
+          let respuesta = ''
+          try {
+            respuesta = await fetch("https://crueltyscan.azurewebsites.net/api/marcas", requestOptions)
+          } catch (error) {
+            Alert.alert('Alerta', 'Error en el sistema', [
+              { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
             ])
-            navigation.navigate('MenuAdmin')
             return;
-        }
+          }
+      
+          if (respuesta.status === 200) {
+              navigation.navigate('MenuAdmin')
+              Alert.alert('Alerta', 'Se registró una nueva marca', [
+                { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+              ])
+              return;
+            }
 
     }
 
@@ -33,11 +57,6 @@ const RegistroMarca = ({ navigation }) => {
                 <Text style={styles.texto}>Registro de marca</Text>
             </View>
             <View>
-                <Text style={styles.letras}>ID: </Text>
-                <TextInput placeholder='Ej: 12381' placeholderTextColor={'#666'} style={styles.input}
-                    onChangeText={texto => guardarIdMarca(texto)}
-                    value={idMarca}
-                />
 
                 <Text style={styles.letras}>Nombre de la marca: </Text>
                 <TextInput placeholder='Ej: Argan' placeholderTextColor={'#666'} style={styles.input}
@@ -53,7 +72,6 @@ const RegistroMarca = ({ navigation }) => {
                     numberOfLines={10}
                     onChangeText={texto => guardarDescripcion(texto)}
                     value={descripcion}
-
                     style={{ marginHorizontal: 20, color: '#000000', height: 200, width: 320, textAlignVertical: 'top', borderWidth: 1, borderColor: '#000000' }} />
 
 
