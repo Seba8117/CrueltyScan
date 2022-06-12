@@ -9,7 +9,7 @@ const RegistroMarca = ({ navigation }) => {
   
 
     const registrarMarca  = async () => {
-        if (nombreMarca === ''  ) {
+        if (nombreMarca === ''||  descripcion=== '') {
             Alert.alert('Alerta', 'Hay campos vacios.', [
                 { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
             ])

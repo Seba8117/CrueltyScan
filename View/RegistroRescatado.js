@@ -3,26 +3,58 @@ import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaVi
 const RegistroResacatado = ({ navigation }) => {
     // Campos formulario
     const [nombreRescatado, guardarNombreRescatado] = useState('');
-    const [tipoAnimal, guardarTipoAnimal] = useState('');
     const [color, guardarColor] = useState('');
     const [tamaño, guardarTamaño] = useState('');
     const [edad, guardarEdad] = useState('');
+    const [tipoMascota, guardarTipo] = useState('');
     const [foto, guardarFoto] = useState('');
 
-    const registrarRescatado = () => {
-        if (nombreRescatado === '' || tipoAnimal === '' || color === ''|| tamaño === ''|| edad === ''|| foto === '') {
+    const registrarRescatado = async() => {
+        if (nombreRescatado === '' || tipoMascota === '' || color === ''|| tamaño === ''|| edad === '') {
             Alert.alert('Alerta', 'Hay campos vacios.', [
                 { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
             ])
             return;
         }
-        else{
-            Alert.alert('Alerta', 'Se registró la mascota correctamente.', [
-                { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "color":color,
+                "tamano":tamaño,
+                "nombre":nombreRescatado,
+                "edad":edad,
+                "tipo_mascota":tipoMascota,
+                "rut": "12312312-3",
+
+    
+               
+              
+
+            
+            //    "foto":foto,
+            //    "adptado": 0
+            })
+          };
+          let respuesta = ''
+          try {
+            respuesta = await fetch("https://crueltyscan.azurewebsites.net/api/mascotas", requestOptions)
+          } catch (error) {
+            Alert.alert('Alerta', 'Error en el sistema', [
+              { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
             ])
-            navigation.navigate('Inicio')
             return;
-        }
+          }
+      
+          if (respuesta.status === 200) {
+              navigation.navigate('Inicio')
+              Alert.alert('Alerta', 'Se registró una nueva mascota', [
+                { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+              ])
+              return;
+            }
 
     }
     return (
@@ -34,18 +66,13 @@ const RegistroResacatado = ({ navigation }) => {
                     onChangeText={texto => guardarNombreRescatado(texto)}
                     value={nombreRescatado} />
 
-                <Text style={styles.letras}>Tipo animal:</Text>
-                <TextInput placeholder='Perro, Gato, Ave etc.' placeholderTextColor={'#666'} style={styles.input}
-                    onChangeText={texto => guardarTipoAnimal(texto)}
-                    value={tipoAnimal} />
-
                 <Text style={styles.letras}>Color:</Text>
                 <TextInput placeholder='Color principal del animal' placeholderTextColor={'#666'} style={styles.input}
                     onChangeText={texto => guardarColor(texto)}
                     value={color} />
 
                 <Text style={styles.letras}>Tamaño:</Text>
-                <TextInput placeholder='Ingrese tamaño' placeholderTextColor={'#666'} style={styles.input} 
+                <TextInput placeholder='Ej:pequeño, mediano o Grande' placeholderTextColor={'#666'} style={styles.input} 
                     onChangeText={texto => guardarTamaño(texto)}
                     value={tamaño}/>
 
@@ -54,10 +81,10 @@ const RegistroResacatado = ({ navigation }) => {
                     onChangeText={texto => guardarEdad(texto)}
                     value={edad}/>
 
-                <Text style={styles.letras}>Foto:</Text>
-                <TextInput type='file' placeholder='Seleccione Imagen' placeholderTextColor={'#666'} style={styles.input}
-                    onChangeText={texto => guardarFoto(texto)}
-                    value={foto} />
+                <Text style={styles.letras}>Tipo:</Text>
+                <TextInput type='file' placeholder='Perro, Gato, Ave etc' placeholderTextColor={'#666'} style={styles.input}
+                    onChangeText={texto => guardarTipo(texto)}
+                    value={tipoMascota} />
 
             </View>
             <Pressable style={styles.boton} onPress={() => registrarRescatado()} >
