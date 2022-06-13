@@ -8,6 +8,11 @@ const Buscamarca= ({ navigation }) =>{
     return(
         
         <ScrollView>
+
+          <View>
+            <Text style={styles.textoBuscarMarca}>Buscar Marca</Text>
+          </View>
+
         <Card>
             <Card.Content style={styles.carta} >
              <Title style={styles.letras} >Garnier</Title>
@@ -28,6 +33,14 @@ const Buscamarca= ({ navigation }) =>{
 }
 
 const styles = StyleSheet.create({
+    textoBuscarMarca:{
+        textAlign: 'center',
+        marginTop: 20,
+        marginBottom: 30,
+        fontSize: 30,
+        color: '#0F0E0E'
+    },
+
     foto: {
         height: 190,
         width: 190,

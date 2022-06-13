@@ -8,10 +8,22 @@ import globalStyles from '../style/global';
 const CuidadoCapilar = () => {
   return (
     <View>
-      <Text>Desde adopcion</Text>
+      <Text style={styles.textoCuidadoCapilar}>Cuidado Capilar</Text>
     </View>
   )
 }
 
+const styles = StyleSheet.create({
+
+  textoCuidadoCapilar:{
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 30,
+    fontSize: 30,
+    color: '#0F0E0E'
+
+  }
+
+})
 
 export default CuidadoCapilar

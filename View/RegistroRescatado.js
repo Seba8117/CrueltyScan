@@ -1,5 +1,5 @@
 import React, { useState } from 'react' 
-import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView,Alert } from 'react-native'
+import {Text, View, StyleSheet, TextInput, Pressable, ScrollView, Alert } from 'react-native'
 const RegistroResacatado = ({ navigation }) => {
     // Campos formulario
     const [nombreRescatado, guardarNombreRescatado] = useState('');
@@ -58,7 +58,9 @@ const RegistroResacatado = ({ navigation }) => {
 
     }
     return (
+
         <ScrollView style={styles.fondo}>
+            
             <Text style={styles.titulo}>Datos</Text>
             <View style={styles.formulario}>
                 <Text style={styles.letras}>Nombre:</Text>
@@ -132,11 +134,10 @@ const styles = StyleSheet.create({
         color: '#000000',
         borderWidth: 1,
         borderColor: '#000000',
-        marginHorizontal: 20
-
-
-
+        marginHorizontal: 20,
+        borderRadius: 8,
     },
+    
     boton: {
         backgroundColor: '#D9D7F1',
         padding: 15,

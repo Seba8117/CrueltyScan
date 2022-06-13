@@ -72,7 +72,7 @@ const RegistroMarca = ({ navigation }) => {
                     numberOfLines={10}
                     onChangeText={texto => guardarDescripcion(texto)}
                     value={descripcion}
-                    style={{ marginHorizontal: 20, color: '#000000', height: 200, width: 320, textAlignVertical: 'top', borderWidth: 1, borderColor: '#000000' }} />
+                    style={{ marginHorizontal: 20, color: '#000000', height: 200, width: 368, textAlignVertical: 'top', borderWidth: 1, borderColor: '#000000' }} />
 
 
 

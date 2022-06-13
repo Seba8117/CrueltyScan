@@ -62,7 +62,7 @@ const App = () => {
         <NavigationContainer>
           
           <Stack.Navigator
-            initialRouteName='Login' //Cambiar pagina 
+            initialRouteName='Buscarmarca' //Cambiar pagina 
           >
             <Stack.Screen
               name="Buscamarca"
@@ -509,3 +509,4 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+

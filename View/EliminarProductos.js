@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     },
     fondo: {
         backgroundColor: '#cee5d0',
+        flex: 1
 
 
     },

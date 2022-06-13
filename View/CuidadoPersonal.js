@@ -9,9 +9,21 @@ import globalStyles from '../style/global';
 const CuidadoPersonal = () => {
   return (
     <View>
-      <Text>Desde adopcion</Text>
+      <Text style={styles.textoCuidadoPersonal}>Cuidado Personal</Text>
     </View>
   )
 }
 
+const styles = StyleSheet.create({
+
+  textoCuidadoPersonal:{
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 30,
+    fontSize: 30,
+    color: '#0F0E0E'
+
+  }
+
+})
 export default CuidadoPersonal

@@ -8,9 +8,23 @@ import globalStyles from '../style/global';
 const ArticulosHigiene = () => {
   return (
     <View>
-    <Text>Desde adopcion</Text>
-  </View>
+      <Text style={styles.textoArticulosHiguiene}>Articulos de Higiene</Text>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+
+  textoArticulosHiguiene:{
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 30,
+    fontSize: 30,
+    color: '#0F0E0E'
+
+  }
+
+})
+
 
 export default ArticulosHigiene
