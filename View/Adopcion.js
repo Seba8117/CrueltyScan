@@ -32,6 +32,10 @@ const Adopcion = () => {
 
     return (
         <ScrollView>
+            <View>
+                <Text style={styles.textoAdopcion}>Adopción</Text>
+            </View>
+
             <Card>
                 {datosMascotas.map((mascota, key) => {
                     const { nombre, color, tamano, edad } = mascota
@@ -92,6 +96,15 @@ const Adopcion = () => {
 
 
 const styles = StyleSheet.create({
+    textoAdopcion:{
+        textAlign: 'center',
+        marginTop: 20,
+        marginBottom: 30,
+        fontSize: 30,
+        color: '#0F0E0E'
+    
+      },
+
     foto: {
         height: 190,
         width: 190,

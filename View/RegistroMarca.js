@@ -1,51 +1,51 @@
 import React, { useState } from 'react'
-import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView,Alert } from 'react-native'
+import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView, Alert } from 'react-native'
 
 const RegistroMarca = ({ navigation }) => {
     // Campos formulario
     const [nombreMarca, guardarNombreMarca] = useState('');
     const [descripcion, guardarDescripcion] = useState('');
- 
-  
 
-    const registrarMarca  = async () => {
-        if (nombreMarca === ''||  descripcion=== '') {
+
+
+    const registrarMarca = async () => {
+        if (nombreMarca === '' || descripcion === '') {
             Alert.alert('Alerta', 'Hay campos vacios.', [
                 { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
             ])
             return;
         }
-        
+
         const requestOptions = {
             method: 'POST',
             headers: {
-              "Content-Type": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              "nom_marca":nombreMarca,
-              "descripcion": descripcion, 
-        
-              
-      
+                "nom_marca": nombreMarca,
+                "descripcion": descripcion,
+
+
+
             })
-          };
-          let respuesta = ''
-          try {
+        };
+        let respuesta = ''
+        try {
             respuesta = await fetch("https://crueltyscan.azurewebsites.net/api/marcas", requestOptions)
-          } catch (error) {
+        } catch (error) {
             Alert.alert('Alerta', 'Error en el sistema', [
-              { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+                { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
             ])
             return;
-          }
-      
-          if (respuesta.status === 200) {
-              navigation.navigate('MenuAdmin')
-              Alert.alert('Alerta', 'Se registró una nueva marca', [
+        }
+
+        if (respuesta.status === 200) {
+            navigation.navigate('MenuAdmin')
+            Alert.alert('Alerta', 'Se registró una nueva marca', [
                 { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
-              ])
-              return;
-            }
+            ])
+            return;
+        }
 
     }
 
@@ -72,8 +72,7 @@ const RegistroMarca = ({ navigation }) => {
                     numberOfLines={10}
                     onChangeText={texto => guardarDescripcion(texto)}
                     value={descripcion}
-                    style={{ marginHorizontal: 20, color: '#000000', height: 200, width: 320, textAlignVertical: 'top', borderWidth: 1, borderColor: '#000000' }} />
-
+                    style={{ marginHorizontal: 20, color: '#000000', height: 200, width: 368, textAlignVertical: 'top', borderWidth: 1, borderColor: '#000000' }} />
 
 
             </View>

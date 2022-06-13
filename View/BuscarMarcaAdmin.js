@@ -4,16 +4,16 @@ const BuscarMarcaAdmin = ({ navigation }) => {
 
     return (
         <ScrollView>
-             <View style={styles.fondo}>
+            <View style={styles.fondo}>
                 <Text style={styles.titulo}>Cruelty Scan</Text>
                 <TextInput placeholder='Marca' placeholderTextColor={'#666'} style={styles.input} />
                 <Pressable style={styles.boton}  >
                     <Text style={styles.textoboton} >Buscar</Text>
                 </Pressable>
             </View>
-       
+
         </ScrollView>
-        
+
     )
 
 
@@ -61,8 +61,10 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#000000',
         marginHorizontal: 60,
-        marginTop:20,
-  
+        marginTop: 20,
+        borderRadius: 10
+
+
 
 
 

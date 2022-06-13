@@ -1,32 +1,32 @@
 import React, { useState } from 'react'
 import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView, Alert } from 'react-native'
-const RegistroProducto = ({navigation}) => {
+const RegistroProducto = ({ navigation }) => {
     //Campos formulario
     const [nombreProducto, guardarNombreProducto] = useState('');
     const [test, guardarTest] = useState('');
     const [marca, guardarMarca] = useState('');
     const [categoria, guardarCategoria] = useState('');
-    
+
     const registrarProducto = () => {
 
         //Validar
         if (nombreProducto === '' || test === '' || marca === '' ||
-          categoria === '' ) {
+            categoria === '') {
             Alert.alert('Alerta', 'Hay campos vacios.', [
-              { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+                { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
             ])
             return;
-          }
+        }
         else {
-          Alert.alert('Alerta', 'Registro exitoso.', [
-            { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
-          ])
-          navigation.navigate('MenuAdmin')
-          return;
-    
+            Alert.alert('Alerta', 'Registro exitoso.', [
+                { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+            ])
+            navigation.navigate('MenuAdmin')
+            return;
+
         }
 
-     }
+    }
     return (
         <ScrollView >
             <View style={styles.fondo}>
@@ -126,11 +126,10 @@ const styles = StyleSheet.create({
         color: '#000000',
         borderWidth: 1,
         borderColor: '#000000',
-        marginHorizontal: 20
-
-
-
+        marginHorizontal: 20,
+        borderRadius: 10,
     },
+
     boton: {
         backgroundColor: '#D9D7F1',
         padding: 15,

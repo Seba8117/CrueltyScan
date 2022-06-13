@@ -208,14 +208,15 @@ const styles = StyleSheet.create({
     borderColor: '#000000',
     marginVertical: 15,
     marginRight: 60,
-    marginLeft: 50,
-    width: 260,
+    marginLeft: 65,
+    width: 280,
     height: 50,
     marginTop: 10,
     borderRadius: 8,
     borderWidth: 1,
 
   },
+
 
   btnregistrarUsu: {
     marginVertical: 14,

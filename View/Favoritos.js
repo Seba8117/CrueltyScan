@@ -13,6 +13,7 @@ const Favoritos = ({navigation}) => {
   }
   return (
     <ScrollView >
+       <Text  style={styles.textoFavorito}>Favoritos</Text>
 
     <Card>
       <Card.Content style={styles.carta} >
@@ -36,6 +37,14 @@ const Favoritos = ({navigation}) => {
   )
 }
 const styles = StyleSheet.create({
+  textoFavorito:{
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 30,
+    fontSize: 30,
+    color: '#0F0E0E'
+
+  },
 
   centro:{
     textAlign:'center',
@@ -45,9 +54,10 @@ const styles = StyleSheet.create({
     height: 190,
     width: 190,
     marginTop: 30,
-    marginHorizontal: 70,
+    marginHorizontal: 90,
     marginVertical:20
   },
+
   carta: {
     backgroundColor: '#E5E6E6',
     borderWidth: 1,

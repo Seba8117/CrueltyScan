@@ -1,5 +1,5 @@
-import React, { useState } from 'react' 
-import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView,Alert } from 'react-native'
+import React, { useState } from 'react'
+import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView, Alert } from 'react-native'
 const RegistroResacatado = ({ navigation }) => {
     // Campos formulario
     const [nombreRescatado, guardarNombreRescatado] = useState('');
@@ -9,8 +9,8 @@ const RegistroResacatado = ({ navigation }) => {
     const [tipoMascota, guardarTipo] = useState('');
     const [foto, guardarFoto] = useState('');
 
-    const registrarRescatado = async() => {
-        if (nombreRescatado === '' || tipoMascota === '' || color === ''|| tamaño === ''|| edad === '') {
+    const registrarRescatado = async () => {
+        if (nombreRescatado === '' || tipoMascota === '' || color === '' || tamaño === '' || edad === '') {
             Alert.alert('Alerta', 'Hay campos vacios.', [
                 { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
             ])
@@ -19,42 +19,42 @@ const RegistroResacatado = ({ navigation }) => {
         const requestOptions = {
             method: 'POST',
             headers: {
-              "Content-Type": "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                "color":color,
-                "tamano":tamaño,
-                "nombre":nombreRescatado,
-                "edad":edad,
-                "tipo_mascota":tipoMascota,
+                "color": color,
+                "tamano": tamaño,
+                "nombre": nombreRescatado,
+                "edad": edad,
+                "tipo_mascota": tipoMascota,
                 "rut": "12312312-3",
 
-    
-               
-              
 
-            
-            //    "foto":foto,
-            //    "adptado": 0
+
+
+
+
+                //    "foto":foto,
+                //    "adptado": 0
             })
-          };
-          let respuesta = ''
-          try {
+        };
+        let respuesta = ''
+        try {
             respuesta = await fetch("https://crueltyscan.azurewebsites.net/api/mascotas", requestOptions)
-          } catch (error) {
+        } catch (error) {
             Alert.alert('Alerta', 'Error en el sistema', [
-              { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+                { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
             ])
             return;
-          }
-      
-          if (respuesta.status === 200) {
-              navigation.navigate('Inicio')
-              Alert.alert('Alerta', 'Se registró una nueva mascota', [
+        }
+
+        if (respuesta.status === 200) {
+            navigation.navigate('Inicio')
+            Alert.alert('Alerta', 'Se registró una nueva mascota', [
                 { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
-              ])
-              return;
-            }
+            ])
+            return;
+        }
 
     }
     return (
@@ -72,14 +72,14 @@ const RegistroResacatado = ({ navigation }) => {
                     value={color} />
 
                 <Text style={styles.letras}>Tamaño:</Text>
-                <TextInput placeholder='Ej:pequeño, mediano o Grande' placeholderTextColor={'#666'} style={styles.input} 
+                <TextInput placeholder='Ej:pequeño, mediano o Grande' placeholderTextColor={'#666'} style={styles.input}
                     onChangeText={texto => guardarTamaño(texto)}
-                    value={tamaño}/>
+                    value={tamaño} />
 
                 <Text style={styles.letras}>Edad:</Text>
-                <TextInput placeholder='Ingrese edad' keyboardType='number-pad' placeholderTextColor={'#666'} style={styles.input} 
+                <TextInput placeholder='Ingrese edad' keyboardType='number-pad' placeholderTextColor={'#666'} style={styles.input}
                     onChangeText={texto => guardarEdad(texto)}
-                    value={edad}/>
+                    value={edad} />
 
                 <Text style={styles.letras}>Tipo:</Text>
                 <TextInput type='file' placeholder='Perro, Gato, Ave etc' placeholderTextColor={'#666'} style={styles.input}
@@ -132,11 +132,10 @@ const styles = StyleSheet.create({
         color: '#000000',
         borderWidth: 1,
         borderColor: '#000000',
-        marginHorizontal: 20
-
-
-
+        marginHorizontal: 20,
+        borderRadius: 8,
     },
+
     boton: {
         backgroundColor: '#D9D7F1',
         padding: 15,
