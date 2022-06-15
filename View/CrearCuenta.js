@@ -162,7 +162,7 @@ const CrearCuenta = ({ navigation }) => {
           placeholder='Region'
           placeholderTextColor={'#666'}
           style={styles.input}
-          open={abrir}
+          open={abrir} 
           value={valor}
           items={item}
           setValue={setValor}
