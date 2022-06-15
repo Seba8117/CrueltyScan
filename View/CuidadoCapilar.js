@@ -8,9 +8,8 @@ import globalStyles from '../style/global';
 const CuidadoCapilar = () => {
   return (
     <View>
-      <Text style={styles.textoCuidadoCapilar}>Cuidado Capilar</Text>
+      <Text style={styles.textoCuidadoCapilar}>Cuidado Capilar Merluzo</Text>
     </View>
-
   )
 }
 const styles = StyleSheet.create({
