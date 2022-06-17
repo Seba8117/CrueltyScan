@@ -67,6 +67,7 @@ const CuidadoCapilar = () => {
 
 
 
+
   )
 }
 const styles = StyleSheet.create({

@@ -38,7 +38,7 @@ const Adopcion = () => {
 
             <Card>
                 {datosMascotas.map((mascota, key) => {
-                    const { nombre, color, tamano, edad } = mascota
+                    const { nombre, color, tamano, edad,celular } = mascota
                     return <Card.Content style={styles.carta} key={key}>
                         <View style={styles.centro} >
                             <Image style={styles.foto} source={require('../assets/IMG/adopta1.jpg')} />
@@ -49,7 +49,7 @@ const Adopcion = () => {
                         <Paragraph style={styles.letras}>Edad: {edad} años</Paragraph>
                         <View style={styles.letraultima} >
                             <Title style={styles.letras} >Contacto</Title>
-                            <Paragraph style={styles.letras}>Telefono: 229316092</Paragraph>
+                            <Paragraph style={styles.letras}>{celular} </Paragraph>
                         </View>
                     </Card.Content>
                 })}

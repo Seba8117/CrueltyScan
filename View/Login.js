@@ -3,6 +3,9 @@ import { TextInput, View, StyleSheet, Image, ScrollView, Alert } from 'react-nat
 import { Headline, Button, Paragraph, Dialog, Portal } from 'react-native-paper';
 import { color } from 'react-native-reanimated';
 import globalStyles from '../style/global';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 
 const Login = ({ navigation }) => {
@@ -46,10 +49,16 @@ const Login = ({ navigation }) => {
     if (respuesta.status === 200) {
       const body = await respuesta.json();
       if (body.tipoUsuario === 1) {
+        
         navigation.navigate('MenuAdmin')
+       
+        
+
         return;
       } else {
+        
         navigation.navigate('Inicio')
+        await AsyncStorage.setItem('rut',  JSON.stringify(body.rut));
         return;
       }
     } else {

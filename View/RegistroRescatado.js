@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView, Alert } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const RegistroResacatado = ({ navigation }) => {
     // Campos formulario
     const [nombreRescatado, guardarNombreRescatado] = useState('');
@@ -8,8 +9,23 @@ const RegistroResacatado = ({ navigation }) => {
     const [edad, guardarEdad] = useState('');
     const [tipoMascota, guardarTipo] = useState('');
     const [foto, guardarFoto] = useState('');
+    const [rut,setvalue]=useState('');
+    
+    AsyncStorage.getItem('rut')
+        .then((rut) => {
+            setvalue(JSON.parse(rut))
+        })
+    
+    
+    // console.log("ahora si")
+    
 
     const registrarRescatado = async () => {
+        
+        
+
+        console.log("Click")
+        console.log(rut)
         if (nombreRescatado === '' || tipoMascota === '' || color === '' || tamaño === '' || edad === '') {
             Alert.alert('Alerta', 'Hay campos vacios.', [
                 { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
@@ -27,7 +43,8 @@ const RegistroResacatado = ({ navigation }) => {
                 "nombre": nombreRescatado,
                 "edad": edad,
                 "tipo_mascota": tipoMascota,
-                "rut": "12312312-3",
+                "rut": rut
+            
 
 
 
@@ -85,6 +102,7 @@ const RegistroResacatado = ({ navigation }) => {
                 <TextInput type='file' placeholder='Perro, Gato, Ave etc' placeholderTextColor={'#666'} style={styles.input}
                     onChangeText={texto => guardarTipo(texto)}
                     value={tipoMascota} />
+                    
 
             </View>
             <Pressable style={styles.boton} onPress={() => registrarRescatado()} >
