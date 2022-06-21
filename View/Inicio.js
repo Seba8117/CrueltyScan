@@ -38,25 +38,12 @@ const Inicio = ({ navigation }) => {
   return (
 
 <ScrollView>
-    <View style={styles.fondo}>
-      <View style={styles.searchbar}>
-        <Searchbar
-          onPress={() => Buscamarca()}
-          placeholder="Buscar Marca"
-          backgroundColor="transparent"
-          theme={{
-            colors: {
-              text: '#FFF',
-              backgroundColor:'transparent'
-            }
-          }}
-
-        />
-
+<View>
+       <Text style={styles.texto1}>Menú</Text>
       </View>
-    </View>
 
 <View>
+
   <Card style={styles.fondo}>
     <Image style={styles.foto} source={require('../assets/IMG/codigo.png')}/>
     <Button style={styles.btnMa1} onPress={() => { escanner() }}>Escanear Codigo</Button> 
@@ -79,22 +66,29 @@ const Inicio = ({ navigation }) => {
 
 <View>
   <Card style={styles.fondo}>
+    <Image style={styles.foto} source={require('../assets/IMG/buscar.png')}/>
+    <Button style={styles.btnMa4} onPress={() => { Buscamarca() }}>Marcas</Button> 
+  </Card>
+</View>
+
+<View>
+  <Card style={styles.fondo}>
     <Image style={styles.foto} source={require('../assets/IMG/star.png')}/>
-    <Button style={styles.btnMa4} onPress={() => { favoritousu() }}>Favoritos</Button> 
+    <Button style={styles.btnMa5} onPress={() => { favoritousu() }}>Favoritos</Button> 
   </Card>
 </View>
 
 <View>
   <Card style={styles.fondo}>
     <Image style={styles.foto} source={require('../assets/IMG/micuenta.png')}/>
-    <Button style={styles.btnMa5} onPress={() => { editarCuenta() }}>Mi Cuenta</Button> 
+    <Button style={styles.btnMa6} onPress={() => { editarCuenta() }}>Mi Cuenta</Button> 
   </Card>
 </View>
 
 <View>
   <Card style={styles.fondo}>
     <Image style={styles.foto} source={require('../assets/IMG/salir.png')}/>
-    <Button style={styles.btnMa6} onPress={() => { Salir() }}>Cerrar Sesión</Button> 
+    <Button style={styles.btnMa7} onPress={() => { Salir() }}>Cerrar Sesión</Button> 
   </Card>
 </View>
 
@@ -118,26 +112,18 @@ const styles = StyleSheet.create({
     margin: 2,
     height:70,
     width: 390,
-    marginVertical: 5 ,
+    marginVertical: 2 ,
     paddingVertical: 10,
     marginHorizontal: 10
-
-  },
-
-  searchbar:{
-    marginTop:10,
-    marginVertical:20,
-    marginHorizontal:10
 
   },
 
   texto1:{
     textAlign: 'center',
     marginTop: 20,
-    marginBottom: 30,
+    marginBottom: 5,
     fontSize: 30,
     color: '#0F0E0E',
-    padding: -20
   },
 
   foto: {
@@ -163,15 +149,21 @@ const styles = StyleSheet.create({
 
   btnMa4:{
     marginTop: -45,
-    left: -15
+    left: -25
   },
 
+  
   btnMa5:{
     marginTop: -45,
     left: -15
   },
 
   btnMa6:{
+    marginTop: -45,
+    left: -15
+  },
+
+  btnMa7:{
     marginTop: -45,
     left: 2
   }
