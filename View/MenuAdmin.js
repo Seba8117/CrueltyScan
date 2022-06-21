@@ -30,6 +30,12 @@ const MenuAdmin = ({ navigation }) => {
 
     return (
         <ScrollView >
+            <View style={styles.centro}>
+               <Image style={styles.logo}
+                 source={require('../assets/IMG/Logo.png')}/>
+               <Text style={styles.titulo}>Cruelty Scan</Text>
+            </View>
+
             <View style={styles.fondo}>
                 <Text style={styles.texto}>Bienvenido Administrador!</Text>
             </View>
@@ -90,6 +96,12 @@ const MenuAdmin = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+    logo: {
+        height: 80,
+        width: 80,
+        marginTop: 5,
+        marginHorizontal: 170
+      },
     botoncerrar: {
         backgroundColor: '#D9D7F1',
         padding: 15,
@@ -100,16 +112,16 @@ const styles = StyleSheet.create({
        
     },
     titulo: {
-        marginTop: 50,
+        marginTop: 5,
         textAlign: 'center',
-        fontSize: 30,
+        fontSize: 15,
         color: '#000000',
         fontWeight: '600',
     },
    
     texto: {
         color: '#000000',
-        marginTop: 20,
+        marginTop: 10,
         fontSize: 25,
         textAlign: 'center'
       
@@ -120,18 +132,18 @@ const styles = StyleSheet.create({
     fondo: {
         backgroundColor: 'transparent',
         flex: 1,
-        margin: 2,
-        height:70,
+        margin:1 ,
+        height:60,
         width: 390,
-        marginVertical: 6 ,
+        marginVertical: 5 ,
         paddingVertical: 10,
         marginHorizontal: 10
     
       },
     
       foto: {
-        width: 50,
-        height: 50,
+        width: 45,
+        height: 45,
         marginHorizontal:40
       },
     
