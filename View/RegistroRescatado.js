@@ -76,7 +76,7 @@ const RegistroResacatado = ({ navigation }) => {
     }
     return (
         <ScrollView style={styles.fondo}>
-            <Text style={styles.titulo}>Datos</Text>
+            <Text style={styles.titulo}>Registro Rescatado</Text>
             <View style={styles.formulario}>
                 <Text style={styles.letras}>Nombre:</Text>
                 <TextInput placeholder='Nombre rescatado' placeholderTextColor={'#666'} style={styles.input}
