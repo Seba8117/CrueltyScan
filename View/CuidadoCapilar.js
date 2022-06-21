@@ -53,7 +53,7 @@ const CuidadoCapilar = () => {
           return  <Card.Content style={styles.carta} key={key}>
             <Title style={styles.letras} > {nom_producto} </Title>
             <Paragraph style={styles.letras}> {nom_marca} </Paragraph>
-            <Image style={styles.foto} source={require('../assets/IMG/maquillaje9colores.png')} />
+            <Image style={styles.foto} source={require('../assets/IMG/Shamphoo_Detox.png')} />
 
             <Button onPress={() => agregarFav()}
               style={styles.btnAgregar} color='#F1C40F' icon={require('../assets/IMG/star.png')}
@@ -82,9 +82,9 @@ const styles = StyleSheet.create({
 
   foto: {
     height: 190,
-    width: 190,
+    width: 150,
     marginTop: 30,
-    marginHorizontal: 90,
+    marginHorizontal: 100,
     marginVertical: 20
   },
 
