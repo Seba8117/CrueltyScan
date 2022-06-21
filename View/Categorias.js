@@ -71,10 +71,12 @@ const styles = StyleSheet.create({
   fondo: {
     backgroundColor: 'transparent',
     flex: 1,
-    padding: 15,
     margin: 2,
     height:120,
-    width: 403
+    width: 403,
+    marginVertical: 5 ,
+    paddingVertical: 10,
+    marginHorizontal: 10
 
   },
 
@@ -89,7 +91,8 @@ const styles = StyleSheet.create({
 
   foto: {
     width: 100,
-    height: 100
+    height: 100,
+    marginHorizontal:10
   },
 
   btnMa:{

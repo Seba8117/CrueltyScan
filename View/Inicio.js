@@ -59,42 +59,42 @@ const Inicio = ({ navigation }) => {
 <View>
   <Card style={styles.fondo}>
     <Image style={styles.foto} source={require('../assets/IMG/codigo.png')}/>
-    <Button style={styles.btnMa} onPress={() => { escanner() }}>Escanear Codigo</Button> 
+    <Button style={styles.btnMa1} onPress={() => { escanner() }}>Escanear Codigo</Button> 
   </Card>
 </View>
 
 <View>
   <Card style={styles.fondo}>
     <Image style={styles.foto} source={require('../assets/IMG/adopción.png')}/>
-    <Button style={styles.btnMa} onPress={() => { adop() }}>Adopción</Button> 
+    <Button style={styles.btnMa2} onPress={() => { adop() }}>Adopción</Button> 
   </Card>
 </View>
 
 <View>
   <Card style={styles.fondo}>
     <Image style={styles.foto} source={require('../assets/IMG/opciones.png')}/>
-    <Button style={styles.btnMa} onPress={() => { categ() }}>Categorias</Button> 
+    <Button style={styles.btnMa3} onPress={() => { categ() }}>Categorias</Button> 
   </Card>
 </View>
 
 <View>
   <Card style={styles.fondo}>
     <Image style={styles.foto} source={require('../assets/IMG/star.png')}/>
-    <Button style={styles.btnMa} onPress={() => { favoritousu() }}>Favoritos</Button> 
+    <Button style={styles.btnMa4} onPress={() => { favoritousu() }}>Favoritos</Button> 
   </Card>
 </View>
 
 <View>
   <Card style={styles.fondo}>
     <Image style={styles.foto} source={require('../assets/IMG/micuenta.png')}/>
-    <Button style={styles.btnMa} onPress={() => { editarCuenta() }}>Mi Cuenta</Button> 
+    <Button style={styles.btnMa5} onPress={() => { editarCuenta() }}>Mi Cuenta</Button> 
   </Card>
 </View>
 
 <View>
   <Card style={styles.fondo}>
     <Image style={styles.foto} source={require('../assets/IMG/salir.png')}/>
-    <Button style={styles.btnMa} onPress={() => { Salir() }}>Cerrar Sesión</Button> 
+    <Button style={styles.btnMa6} onPress={() => { Salir() }}>Cerrar Sesión</Button> 
   </Card>
 </View>
 
@@ -143,13 +143,42 @@ const styles = StyleSheet.create({
   foto: {
     width: 50,
     height: 50,
-    marginHorizontal:10
+    marginHorizontal:40
   },
 
-  btnMa:{
+  btnMa1:{
     marginTop: -45,
-    left: -20
+    left: 15
+  },
+
+  btnMa2:{
+    marginTop: -45,
+    left: -17
+  },
+
+  btnMa3:{
+    marginTop: -45,
+    left: -12
+  },
+
+  btnMa4:{
+    marginTop: -45,
+    left: -15
+  },
+
+  btnMa5:{
+    marginTop: -45,
+    left: -15
+  },
+
+  btnMa6:{
+    marginTop: -45,
+    left: 2
   }
+
+
+
+
 
 
 
