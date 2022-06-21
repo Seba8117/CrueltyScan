@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
-import {View, StyleSheet, ScrollView, Text} from 'react-native';
-import {TextInput, Headline, Button, Paragraph, Dialog, Portal, Menu,Searchbar} from 'react-native-paper';
+import React from 'react'
+import {View, StyleSheet, Image, Text, ScrollView} from 'react-native';
+import {Menu, Avatar, Card, Button} from 'react-native-paper';
 import { AdornmentSide } from 'react-native-paper/lib/typescript/components/TextInput/Adornment/enums';
 import globalStyles from '../style/global';
 
@@ -23,39 +23,47 @@ const Categorias = ({navigation}) => {
      
       
   return (
+<ScrollView>
 
-    <View style={styles.fondo}>
-      <Menu.Item icon={require('../assets/IMG/maquillaje.png')} onPress={() => {maquillajeyBelleza()}} title="Maquillaje y Belleza" 
-      theme={{
-        colors: {
-          text: '#000000',
-        }
-      }}
-      />
-      
-      <Menu.Item icon={require('../assets/IMG/cepillo.png')} onPress={() => {cuidadoCapilar()}} title="Cuidado Capilar" 
-      theme={{
-        colors: {
-          text: '#000000',
-        }
-      }}/>
-      
-      <Menu.Item icon={require('../assets/IMG/articulos.png')} onPress={() => {articulosHigiene()}} title="Articulos de Higiene"  
-      theme={{
-        colors: {
-          text: '#000000',
-        }
-      }}/>
-     
-      <Menu.Item icon={require('../assets/IMG/personal.png')} onPress={() => {cuidadoPersonal()}} title="Cuidado Personal"  
-      theme={{
-        colors: {
-          text: '#000000',
-        }
-      }}/>
-    
-    </View>
-  
+      <View>
+       <Text style={styles.texto1}>Menú</Text>
+      </View>
+
+      <View>
+        <Card style={styles.fondo}>
+          <Image style={styles.foto} source={require('../assets/IMG/maquillaje.png')}/>
+          <Button style={styles.btnMa} onPress={() => {maquillajeyBelleza()}}>Maquillaje y Belleza</Button> 
+        </Card>
+      </View>
+
+      <View>
+        <Card style={styles.fondo}>
+          <Image style={styles.foto} source={require('../assets/IMG/cepillo.png')}/>
+          <Button style={styles.btnMa} onPress={() => {cuidadoCapilar()}}>Cuidado Capilar</Button> 
+        </Card>
+      </View>
+
+      <View>
+        <Card style={styles.fondo}>
+          <Image style={styles.foto} source={require('../assets/IMG/articulos.png')}/>
+          <Button style={styles.btnMa} onPress={() => {articulosHigiene()}}>Articulos de Higiene</Button> 
+        </Card>
+      </View>
+
+      <View>
+        <Card style={styles.fondo}>
+          <Image style={styles.foto} source={require('../assets/IMG/personal.png')}/>
+          <Button style={styles.btnMa} onPress={() => {cuidadoPersonal()}}>Cuidado Personal</Button> 
+        </Card>
+      </View>
+
+      <View>
+
+
+
+</View>
+
+    </ScrollView>
   )
 }
 const styles = StyleSheet.create({
@@ -63,8 +71,31 @@ const styles = StyleSheet.create({
   fondo: {
     backgroundColor: 'transparent',
     flex: 1,
+    padding: 15,
+    margin: 2,
+    height:120,
+    width: 403
 
   },
+
+  texto1:{
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 30,
+    fontSize: 30,
+    color: '#0F0E0E',
+    padding: -20
+  },
+
+  foto: {
+    width: 100,
+    height: 100
+  },
+
+  btnMa:{
+    marginTop: -45,
+    right: -50
+  }
 
 });
 
