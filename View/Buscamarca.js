@@ -9,7 +9,7 @@ const Buscamarca = ({ navigation }) => {
 
         <ScrollView>
             <View>
-                <Text style={styles.textoBuscarMarca}>Buscar Marca</Text>
+                <Text style={styles.textoBuscarMarca}>Marcas no testeadas en animales</Text>
             </View>
 
             <Card>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 20,
         marginBottom: 30,
-        fontSize: 30,
+        fontSize: 20,
         color: '#0F0E0E'
     },
 
