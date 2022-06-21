@@ -1,5 +1,7 @@
 import React from 'react'
-import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView } from 'react-native'
+import {Text,View, StyleSheet, Pressable, ScrollView } from 'react-native'
+import {Button} from 'react-native-paper';
+import icon from 'react-native-vector-icons'
 import BuscarMarcaAdmin from './BuscarMarcaAdmin'
 
 const MenuAdmin = ({ navigation }) => {
@@ -30,17 +32,19 @@ const MenuAdmin = ({ navigation }) => {
         <ScrollView >
             <View style={styles.fondo}>
                 <Text style={styles.titulo}>Cruelty Scan</Text>
-                <Text style={styles.texto}>Bienvenido administrador!</Text>
-                <Pressable style={styles.boton}   onPress={() => visitarBuscarMarcaAdmin()} >
+                <Text style={styles.texto}>Bienvenido Administrador!</Text>
+                <Pressable  style={styles.boton2}  onPress={() => visitarBuscarMarcaAdmin()} >
                     <Text style={styles.textoboton} >Encuentra una marca</Text>
+        
                 </Pressable>
+                
             </View>
             <View>
                 <Pressable onPress={() => visitarRegistroMarca()} style={styles.boton2}>
                     <Text style={styles.textoboton2} >Registrar Marca</Text>
                 </Pressable>
             
-                <Pressable style={styles.boton2} onPress={() => visitarEliminarMarcas()}>
+                <Pressable  style={styles.boton2} onPress={() => visitarEliminarMarcas()}>
                     <Text style={styles.textoboton2}  >Eliminar Marcas</Text>
                 </Pressable>
                 
