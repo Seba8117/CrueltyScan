@@ -32,28 +32,28 @@ const Categorias = ({navigation}) => {
       <View>
         <Card style={styles.fondo}>
           <Image style={styles.foto} source={require('../assets/IMG/maquillaje.png')}/>
-          <Button style={styles.btnMa} onPress={() => {maquillajeyBelleza()}}>Maquillaje y Belleza</Button> 
+          <Button style={styles.btnMa1} onPress={() => {maquillajeyBelleza()}}>Maquillaje y Belleza</Button> 
         </Card>
       </View>
 
       <View>
         <Card style={styles.fondo}>
           <Image style={styles.foto} source={require('../assets/IMG/cepillo.png')}/>
-          <Button style={styles.btnMa} onPress={() => {cuidadoCapilar()}}>Cuidado Capilar</Button> 
+          <Button style={styles.btnMa2} onPress={() => {cuidadoCapilar()}}>Cuidado Capilar</Button> 
         </Card>
       </View>
 
       <View>
         <Card style={styles.fondo}>
           <Image style={styles.foto} source={require('../assets/IMG/articulos.png')}/>
-          <Button style={styles.btnMa} onPress={() => {articulosHigiene()}}>Articulos de Higiene</Button> 
+          <Button style={styles.btnMa3} onPress={() => {articulosHigiene()}}>Articulos de Higiene</Button> 
         </Card>
       </View>
 
       <View>
         <Card style={styles.fondo}>
           <Image style={styles.foto} source={require('../assets/IMG/personal.png')}/>
-          <Button style={styles.btnMa} onPress={() => {cuidadoPersonal()}}>Cuidado Personal</Button> 
+          <Button style={styles.btnMa4} onPress={() => {cuidadoPersonal()}}>Cuidado Personal</Button> 
         </Card>
       </View>
 
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 2,
     height:120,
-    width: 403,
+    width: 390,
     marginVertical: 5 ,
     paddingVertical: 10,
     marginHorizontal: 10
@@ -82,23 +82,37 @@ const styles = StyleSheet.create({
 
   texto1:{
     textAlign: 'center',
-    marginTop: 20,
-    marginBottom: 30,
+    marginTop: 25, 
     fontSize: 30,
     color: '#0F0E0E',
-    padding: -20
+    padding: -30
   },
 
   foto: {
     width: 100,
     height: 100,
-    marginHorizontal:10
+    marginHorizontal:20
   },
 
-  btnMa:{
-    marginTop: -45,
+  btnMa1:{
+    marginTop: -60,
     right: -50
-  }
+  },
+
+  btnMa2:{
+    marginTop: -60,
+    right: -30
+  },
+
+  btnMa3:{
+    marginTop: -60,
+    right: -48
+  },
+
+  btnMa4:{
+    marginTop: -60,
+    right: -38
+  },
 
 });
 
