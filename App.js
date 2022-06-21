@@ -64,7 +64,7 @@ const App = () => {
         <NavigationContainer>
           
           <Stack.Navigator
-            initialRouteName='ValidacionCodigo' //Cambiar pagina 
+            initialRouteName='NuevaContraseña' //Cambiar pagina 
           >
             <Stack.Screen
               name="Buscamarca"
