@@ -1,6 +1,6 @@
 import React from 'react'
-import {Text,View, StyleSheet, Pressable, ScrollView } from 'react-native'
-import {Button} from 'react-native-paper';
+import {Text,View, StyleSheet, Pressable, ScrollView, Image} from 'react-native'
+import {Button, Card} from 'react-native-paper';
 import icon from 'react-native-vector-icons'
 import BuscarMarcaAdmin from './BuscarMarcaAdmin'
 
@@ -31,47 +31,58 @@ const MenuAdmin = ({ navigation }) => {
     return (
         <ScrollView >
             <View style={styles.fondo}>
-                <Text style={styles.titulo}>Cruelty Scan</Text>
                 <Text style={styles.texto}>Bienvenido Administrador!</Text>
-                <Pressable  style={styles.boton2}  onPress={() => visitarBuscarMarcaAdmin()} >
-                    <Text style={styles.textoboton} >Encuentra una marca</Text>
-        
-                </Pressable>
-                
             </View>
-            <View>
-                <Pressable onPress={() => visitarRegistroMarca()} style={styles.boton2}>
-                    <Text style={styles.textoboton2} >Registrar Marca</Text>
-                </Pressable>
+
             
-                <Pressable  style={styles.boton2} onPress={() => visitarEliminarMarcas()}>
-                    <Text style={styles.textoboton2}  >Eliminar Marcas</Text>
-                </Pressable>
-                
-                <Pressable style={styles.boton2} onPress={() => visitarRegistroProducto()}>
-                    <Text style={styles.textoboton2}  > Registrar Productos</Text>
-                </Pressable>
-               
 
-                <Pressable style={styles.boton2} onPress={() => visitarListadoRescatados()} >
-                    <Text style={styles.textoboton2} >Administrar Adopciones</Text>
-                </Pressable>
-                
-                <Pressable  style={styles.botoncerrar} onPress={() => visitarCerrarSesion()}>
-                    <Text  style={styles.textoboton2} >Cerrar sesión</Text>
-                </Pressable>
-                
+            <View>
 
-                
+                <Card style={styles.fondo}>
+                    <Image style={styles.foto} source={require('../assets/IMG/nube.png')}/>
+                    <Button style={styles.btnMa1} onPress={() => visitarBuscarMarcaAdmin()}>Encuentra una marca</Button> 
+                </Card>
+                </View>
+
+                <View>
+                <Card style={styles.fondo}>
+                    <Image style={styles.foto} source={require('../assets/IMG/registro-en-linea.png')}/>
+                    <Button style={styles.btnMa2} onPress={() => visitarRegistroMarca()} >Registrar Marca</Button> 
+                </Card>
+                </View>
+
+                <View>
+                <Card style={styles.fondo}>
+                    <Image style={styles.foto} source={require('../assets/IMG/boton-eliminar.png')}/>
+                    <Button style={styles.btnMa3} onPress={() => visitarEliminarMarcas()}>Eliminar Marca</Button> 
+                </Card>
+                </View>
+
+                <View>
+                <Card style={styles.fondo}>
+                    <Image style={styles.foto} source={require('../assets/IMG/registrado.png')}/>
+                    <Button style={styles.btnMa4} onPress={() => visitarRegistroProducto()}>Registrar Productos</Button> 
+                </Card>
+                </View>
+
+                <View>
+                <Card style={styles.fondo}>
+                    <Image style={styles.foto} source={require('../assets/IMG/adopcion.png')}/>
+                    <Button style={styles.btnMa5}  onPress={() => visitarListadoRescatados()}>Administrar Adopciones</Button> 
+                </Card>
+                </View>
+
+
+                <View>
+                <Card style={styles.fondo}>
+                    <Image style={styles.foto} source={require('../assets/IMG/salir.png')}/>
+                    <Button style={styles.btnMa6} onPress={() => visitarCerrarSesion()}>Cerrar Sesión</Button> 
+                </Card>
+                </View>
+
+              <View>
             </View>
-
         </ScrollView>
-
-
-
-
-
-
 
     )
 
@@ -87,100 +98,75 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
        
-
-
-
-
     },
     titulo: {
         marginTop: 50,
         textAlign: 'center',
-        fontSize: 25,
+        fontSize: 30,
         color: '#000000',
         fontWeight: '600',
     },
-    fondo: {
-        backgroundColor: '#cee5d0',
-
-
-    },
+   
     texto: {
         color: '#000000',
         marginTop: 20,
-        fontSize: 18,
+        fontSize: 25,
         textAlign: 'center'
+      
 
     },
-    letras: {
-        color: '#000000',
-        marginTop: 10,
-        fontSize: 18,
-        fontWeight: '600',
-        marginHorizontal: 20
+    
 
-
-    },
-    formulario: {
-        backgroundColor: '#D9D9D8',
-        marginTop: 20,
-        marginHorizontal: 40,
-
-    },
-    input: {
-        backgroundColor: '#FFF',
-        // borderRadius: 20,
-        color: '#000000',
-        borderWidth: 1,
-        borderColor: '#000000',
-        marginHorizontal: 20
-
-
-
-    },
-    boton: {
-        backgroundColor: '#D9D7F1',
-        padding: 15,
-        marginTop: 20,
-        marginHorizontal: 60,
-        borderRadius: 10,
-        borderWidth: 1,
-        marginVertical: 20,
-        borderColor: '#000000',
-
-
-
-
-    },
-    textoboton: {
-        textAlign: 'center',
-        color: '#000000',
-        fontSize: 18,
-        //textTransform:'uppercase',
-        //fontWeight:'900'
-        fontWeight: '600'
-    },
-
-    boton2: {
-        backgroundColor: '#E1E1DF',
-        padding: 15,
-        marginTop: 20,
-        marginHorizontal: 60,
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: '#000000',
-
-
-
-
-    },
-    textoboton2: {
-        textAlign: 'center',
-        color: '#000000',
-        fontSize: 18,
-        //textTransform:'uppercase',
-        //fontWeight:'900'
-
-    },
+    fondo: {
+        backgroundColor: 'transparent',
+        flex: 1,
+        margin: 2,
+        height:70,
+        width: 390,
+        marginVertical: 6 ,
+        paddingVertical: 10,
+        marginHorizontal: 10
+    
+      },
+    
+      foto: {
+        width: 50,
+        height: 50,
+        marginHorizontal:40
+      },
+    
+      btnMa1:{
+        marginTop: -45,
+        left: 15
+      },
+    
+      btnMa2:{
+        marginTop: -45,
+        left: -7
+      },
+    
+      btnMa3:{
+        marginTop: -45,
+        left: -12
+      },
+    
+      btnMa4:{
+        marginTop: -45,
+        left: 5
+      },
+    
+      
+      btnMa5:{
+        marginTop: -45,
+        left: 20
+      },
+    
+      btnMa6:{
+        marginTop: -45,
+        left: -20
+      },
+    
+    
 
 })
 

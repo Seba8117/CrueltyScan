@@ -62,7 +62,7 @@ const App = () => {
         <NavigationContainer>
           
           <Stack.Navigator
-            initialRouteName='Maquillaje' //Cambiar pagina 
+            initialRouteName='MenuAdmin' //Cambiar pagina 
           >
             <Stack.Screen
               name="Buscamarca"
