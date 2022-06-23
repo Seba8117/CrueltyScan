@@ -59,8 +59,8 @@ const MenuAdmin = ({ navigation }) => {
 
                 <View>
                 <Card style={styles.fondo}>
-                    <Image style={styles.foto} source={require('../assets/IMG/boton-eliminar.png')}/>
-                    <Button style={styles.btnMa3} onPress={() => visitarEliminarMarcas()}>Eliminar Marca</Button> 
+                    <Image style={styles.foto} source={require('../assets/IMG/actualizar.png')}/>
+                    <Button style={styles.btnMa3} onPress={() => visitarEliminarMarcas()}>Modificar Marca</Button> 
                 </Card>
                 </View>
 
