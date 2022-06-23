@@ -1,35 +1,48 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView, Image, Alert } from 'react-native'
 const EliminarMarcas = ({ navigation }) => {
-    const eliminar = () => {
-        Alert.alert('Alerta', 'Marca eliminada', [
+    const ModificarMarca = () => {
+        Alert.alert('Alerta', 'Marca modificada con exito!', [
             { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
         ])
         navigation.navigate('MenuAdmin')
 
+        
     }
+
+    const [nombreMarca, guardarModificarNombreMarca] = useState('');
+    const [descripcion, guardarModificarDescripcion] = useState('');
+
+
     return (
         <ScrollView >
             <View style={styles.fondo}>
                 <Text style={styles.titulo}>Cruelty Scan</Text>
-                <Text style={styles.texto}>Eliminar Marcas      </Text>
+                <Text style={styles.texto}>Modificar Marcas      </Text>
             </View>
+
             <View>
-                <Pressable style={styles.boton2} onPress={() => eliminar()}>
-                    <Text style={styles.textoboton2} ><Image style={styles.logo} source={require('../assets/IMG/close.png')} /> Garnier    </Text>
-                </Pressable>
+            <Text style={styles.letras}>Nombre de la marca: </Text>
+                <TextInput placeholder='Ej: Argan' placeholderTextColor={'#666'} style={styles.input}
+                    onChangeText={texto => guardarModificarNombreMarca(texto)}
+                    value={nombreMarca}
+                />
 
-                <Pressable style={styles.boton2} onPress={() => eliminar()} >
-                    <Text style={styles.textoboton2} ><Image style={styles.logo} source={require('../assets/IMG/close.png')} /> The Body Shop  </Text>
-                </Pressable>
-
-
-                <Pressable style={styles.boton2} onPress={() => eliminar()}>
-                    <Text style={styles.textoboton2} ><Image style={styles.logo} source={require('../assets/IMG/close.png')} /> Avene       </Text>
-                </Pressable>
+                <Text style={styles.letras}>Descripcion:</Text>
+                <TextInput
+                    multiline={true}
+                    placeholder='Escriba una breve desacripcion de la marca'
+                    placeholderTextColor={'#666'}
+                    numberOfLines={10}
+                    onChangeText={texto => guardarModificarDescripcion(texto)}
+                    value={descripcion}
+                    style={{ marginHorizontal: 20, color: '#000000', height: 200, width: 368, textAlignVertical: 'top', borderWidth: 1, borderColor: '#000000' }} />
 
 
             </View>
+            <Pressable style={styles.boton} onPress={() => ModificarMarca()} >
+                <Text style={styles.textoboton} >Modificar Marca</Text>
+            </Pressable>
 
         </ScrollView>
 
