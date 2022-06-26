@@ -44,8 +44,6 @@ import BuscarMarcaAdmin from './View/BuscarMarcaAdmin';
 import RegistroProducto from './View/RegistroProducto';
 import EliminarProductos from './View/EliminarProductos';
 import Buscamarca from './View/Buscamarca';
-import ValidacionCodigo from './View/ValidacionCodigo';
-import NuevaContraseña from './View/NuevaContraseña';
 
 
 
@@ -64,7 +62,7 @@ const App = () => {
         <NavigationContainer>
           
           <Stack.Navigator
-            initialRouteName='MenuAdmin' //Cambiar pagina 
+            initialRouteName='Login' //Cambiar pagina 
           >
             <Stack.Screen
               name="Buscamarca"
@@ -167,38 +165,6 @@ const App = () => {
             <Stack.Screen
               name="RecupContr"
               component={RecupContr}
-              options={{
-                title: 'Crueltly Scan',
-                headerTitleAlign: 'center',
-                headerStyle: {
-                  backgroundColor: '#c1f4c5'
-                },
-                headerTintColor: '#0F0E0E',
-                headerTitleStyle: {
-                  fontWeight: 'bold'
-                }
-              }}
-            />
-
-            <Stack.Screen
-              name="ValidacionCodigo"
-              component={ValidacionCodigo}
-              options={{
-                title: 'Crueltly Scan',
-                headerTitleAlign: 'center',
-                headerStyle: {
-                  backgroundColor: '#c1f4c5'
-                },
-                headerTintColor: '#0F0E0E',
-                headerTitleStyle: {
-                  fontWeight: 'bold'
-                }
-              }}
-            />
-
-            <Stack.Screen
-              name="NuevaContraseña"
-              component={NuevaContraseña}
               options={{
                 title: 'Crueltly Scan',
                 headerTitleAlign: 'center',
