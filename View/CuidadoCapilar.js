@@ -1,18 +1,27 @@
-import React, { useState,useEffect } from 'react'
-import { View, StyleSheet, ScrollView,Image, Text } from 'react-native';
-import { TextInput, Headline,Card,Title, Button, Paragraph, Dialog, Portal, Menu, Searchbar } from 'react-native-paper';
+import React, { useState, useEffect } from 'react'
+import { View, StyleSheet, ScrollView,Pressable, Image, Text,Alert } from 'react-native';
+import { TextInput, Headline, Card, Title, Button, Paragraph, Dialog, Portal, Menu, Searchbar } from 'react-native-paper';
 import { AdornmentSide } from 'react-native-paper/lib/typescript/components/TextInput/Adornment/enums';
 import globalStyles from '../style/global';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const CuidadoCapilar = () => {
+const CuidadoCapilar = ({ navigation }) => {
   const [datosCuidado, setdatosCuidado] = useState([])
-  
+  const [rut, setvalue] = useState('');
+
+  AsyncStorage.getItem('rut')
+    .then((rut) => {
+      setvalue(JSON.parse(rut))
+    })
+
+  console.log(rut)
+
   useEffect(() => {
     const llamarBdCuidado = async () => {
       const requestOptions = {
         method: 'GET',
-       
+
       };
       let respuesta
       try {
@@ -33,10 +42,38 @@ const CuidadoCapilar = () => {
 
 
 
-  const agregarFav = () => {
-    Alert.alert('Alerta', 'Se agregó el producto a favoritos', [
-      { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
-    ])
+  const agregarFav = async () => {
+    console.log("Click")
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "cod_barra": "978020137966",
+        "rut": "12312312-3"
+      })
+    };
+    let respuesta = ''
+    try {
+      respuesta = await fetch("https://crueltyscan.azurewebsites.net/api/producto-favorito", requestOptions)
+    } catch (error) {
+      Alert.alert('Alerta', 'Error en el sistema', [
+        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+      ])
+      return;
+    }
+
+    if (respuesta.status === 200) {
+      navigation.navigate('Inicio')
+      Alert.alert('Alerta', 'Se añadio un producto a favorito', [
+        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+      ])
+      return;
+    }
+
+
+
   }
   return (
     <ScrollView >
@@ -48,9 +85,9 @@ const CuidadoCapilar = () => {
 
       <Card>
         {datosCuidado.map((cuidado, key) => {
-          const { nom_producto,nom_marca } = cuidado
+          const { nom_producto, nom_marca } = cuidado
 
-          return  <Card.Content style={styles.carta} key={key}>
+          return <Card.Content style={styles.carta} key={key}>
             <Title style={styles.letras} > {nom_producto} </Title>
             <Paragraph style={styles.letras}> {nom_marca} </Paragraph>
             <Image style={styles.foto} source={require('../assets/IMG/maquillaje9colores.png')} />
@@ -58,11 +95,16 @@ const CuidadoCapilar = () => {
             <Button onPress={() => agregarFav()}
               style={styles.btnAgregar} color='#F1C40F' icon={require('../assets/IMG/star.png')}
             > Agregar a favoritos</Button>
+            
+      
+
 
           </Card.Content>
 
         })}
+  
       </Card>
+
     </ScrollView>
 
 

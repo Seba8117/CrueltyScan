@@ -17,13 +17,10 @@ const RegistroResacatado = ({ navigation }) => {
         })
     
     
-    // console.log("ahora si")
+
     
 
     const registrarRescatado = async () => {
-        
-        
-
         console.log("Click")
         console.log(rut)
         if (nombreRescatado === '' || tipoMascota === '' || color === '' || tamaño === '' || edad === '') {

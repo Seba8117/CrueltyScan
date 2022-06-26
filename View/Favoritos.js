@@ -1,43 +1,82 @@
-import React, {useState} from 'react'
-import {Image, View, StyleSheet, ScrollView, Text, Alert} from 'react-native';
-import {TextInput, Headline, Button, Paragraph, Dialog, Title, Menu, Card} from 'react-native-paper';
+import React, { useState, useEffect } from 'react'
+import { Image, View, StyleSheet, ScrollView, Text, Alert } from 'react-native';
+import { TextInput, Headline, Button, Paragraph, Dialog, Title, Menu, Card } from 'react-native-paper';
 import globalStyles from '../style/global';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const Favoritos = ({navigation}) => {
-  const eliminarFav = () => {
-    Alert.alert('Alerta', 'Se ha eliminado el producto de favoritos', [
-      { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
-    ])
-    navigation.navigate('Inicio')
-  }
+const Favoritos = ({ navigation }) => {
+  
+  const [datosFav, setDatosfav] = useState([])
+
+  const getData = () => {
+      AsyncStorage.getItem('rut')
+        .then((rut) => {
+          setvalue(JSON.parse(rut))
+        })
+
+  } 
+  const [rut, setvalue] = useState(null);
+  console.log(rut)
+
+  useEffect(() => {
+    
+    const llamarBdFav = async () => {
+      getData();
+      const myHeadars = new Headers();
+      const requestOptions = {
+        method: 'GET',
+
+      };
+      let respuesta
+      try {
+        respuesta = await fetch(`https://crueltyscan.azurewebsites.net/api/producto-favorito/${rut}`, requestOptions)
+      } catch (error) {
+        Alert.alert('Alerta', 'Error en el sistema', [
+          { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+        ])
+      }
+      if (respuesta.status === 200) {
+        const body = await respuesta.json();
+        setDatosfav(body)
+      }
+    }
+    
+    llamarBdFav()
+  }, [rut])
+
+
   return (
     <ScrollView >
-       <Text  style={styles.textoFavorito}>Favoritos</Text>
+      <Text style={styles.textoFavorito}>Favoritos</Text>
 
-    <Card>
-      <Card.Content style={styles.carta} >
-        <Title style={styles.letras} >Paleta Maquillaje Mac</Title>
-        <Paragraph style={styles.letras}>Paleta de sombras 9 colores</Paragraph>
-        <Image style={styles.foto} source={require('../assets/IMG/maquillaje9colores.png')} />
-        <View style={styles.centro}>
-        
-        <Button onPress={() => eliminarFav()}
-          style={styles.btnEliminar} color='#0F0E0E' icon={require('../assets/IMG/tarro.png')}
-        >Eliminar</Button>
-        
-        </View>
+      <Card>
+        {datosFav.map((favorito, key) => {
+          const { nom_producto, cod_barra} = favorito
+          return <Card.Content style={styles.carta} key={key}>
+            <Title style={styles.letras} >{nom_producto} </Title>
+            <Title style={styles.letras} >{cod_barra} </Title>
+            <Paragraph style={styles.letras}>Paleta de sombras 9 colores</Paragraph>
+            <Image style={styles.foto} source={require('../assets/IMG/maquillaje9colores.png')} />
+            <View style={styles.centro}>
 
-      </Card.Content>
-    </Card>
-    </ScrollView> 
-  
-    
+              <Button onPress={() => eliminarFav()}
+                style={styles.btnEliminar} color='#0F0E0E' icon={require('../assets/IMG/tarro.png')}
+              >Eliminar</Button>
+
+            </View>
+
+          </Card.Content>
+        })}
+      </Card>
+    </ScrollView>
+
+
 
   )
 }
 const styles = StyleSheet.create({
-  textoFavorito:{
+  textoFavorito: {
     textAlign: 'center',
     marginTop: 20,
     marginBottom: 30,
@@ -46,16 +85,16 @@ const styles = StyleSheet.create({
 
   },
 
-  centro:{
-    textAlign:'center',
-    alignItems:'center'
+  centro: {
+    textAlign: 'center',
+    alignItems: 'center'
   },
   foto: {
     height: 190,
     width: 190,
     marginTop: 30,
     marginHorizontal: 90,
-    marginVertical:20
+    marginVertical: 20
   },
 
   carta: {
@@ -81,7 +120,7 @@ const styles = StyleSheet.create({
     height: 40,
 
   },
- 
+
 
 
 })

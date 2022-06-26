@@ -1,58 +1,116 @@
-import React, { useState } from 'react'
-import { View, StyleSheet, ScrollView,Alert } from 'react-native';
-import { TextInput, Headline, Button, Paragraph, Dialog, Portal } from 'react-native-paper';
+import React, { useState, useEffect, useLayoutEffect } from 'react'
+import { View, StyleSheet, ScrollView, Alert, Text, TextInput } from 'react-native';
+import { Headline, Button, Paragraph, Dialog, Portal, Card } from 'react-native-paper';
 import { color } from 'react-native-reanimated';
 import globalStyles from '../style/global';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MiCuenta = ({ navigation }) => {
 
   //Campos formulario
-  const [nombre, guardarNombre] = useState('Cliente');
-  const [apellido, guardarApellido] = useState('Cliente');
-  const [email, guardarEmail] = useState('cliente@gmail.com');
-  const [contraseña, guardarContraseña] = useState('cliente123');
-  const [telefono, guardarTelefono] = useState('99999999');
-  const [direccion, guardarDireccion] = useState('AV.Siempre viva');
-  const [region, guardarRegión] = useState('Metropolitana');
-  const [comuna, guardarComuna] = useState('Conchali');
-  // const [alerta, guardarAlerta] = useState('false');
+  const [nombre_cliente, guardarNombre] = useState('');
+  const [apellido_pa, guardarApellido] = useState('');
+  const [apellido_ma, guardarApellidoMaterno] = useState('');
+  const [correo, guardarCorreo] = useState('');
+  const [contra, guardarContra] = useState('');
+  const [celular, guardarTelefono] = useState();
+
+
+  const [nombre_nuevo, guardarNombrenuevo] = useState('');
+  const [apellido_pa_nuevo, guardarApellidonuevo] = useState(apellido_pa);
+  const [apellido_ma_nuevo, guardarApellidoMaternonuevo] = useState(apellido_ma);
+  const [correo_nuevo, guardarCorreonuevo] = useState('');
+  const [contra_nuevo, guardarContranuevo] = useState('');
+  const [telefono_nuevo, guardarTelefononuevo] = useState();
+  
+  
+  const [datosCliente, setdatosCliente] = useState([])
+
+
+  const [rut, setvalue] = useState('');
+
 
 
 
   //Almacena al usuario en la base de datos 
-  const editarCuenta = () => {
-    //Validar
-    if (nombre === '' || apellido === '' || email === '' ||
-      contraseña === '' || telefono === '' || direccion === ''
-      || region === '' || comuna === '') {
-      //  guardarAlerta(true)
-      Alert.alert('Alerta', 'Hay campos vacios', [
+  const editarCuenta = async () => {
+
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "nombre_cliente": nombre_cliente,
+        "apellido_pa": apellido_pa,
+        "apellido_ma": apellido_ma_nuevo,
+        "correo": correo,
+        "contra": contra,
+
+        //aun no
+        "celular": 950093679,
+        "id_comuna":1,
+      })
+    };
+    let respuesta = ''
+    try {
+      respuesta = await fetch(`https://crueltyscan.azurewebsites.net/api/cliente/${rut}`, requestOptions)
+    } catch (error) {
+      Alert.alert('Alerta', 'Error en el sistema', [
         { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
       ])
-
       return;
     }
-    else{
-      Alert.alert('Alerta', 'Se ha modificado su perfil', [
-        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
-      ])
+
+    if (respuesta.status === 200) {
       navigation.navigate('Inicio')
+      Alert.alert('Alerta', 'Se actualizaron los datos', [
+        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+      ])
       return;
-
     }
-    
-
-    //Generar Registro 
-    const registro = { nombre, apellido, email, contraseña, telefono, direccion, region, comuna };
-
-    //Guardar Usuario
-
-    //Redireccionar
-
-    //Limpiar form 
-
 
   }
+
+
+
+
+
+  useEffect(() => {
+    AsyncStorage.getItem('rut')
+      .then((rut) => {
+        setvalue(JSON.parse(rut))
+      })
+
+    console.log(rut)
+    const llamarBdCliente = async () => {
+      const requestOptions = {
+        method: 'GET'
+      };
+      let respuesta
+
+      try {
+        respuesta = await fetch(`https://crueltyscan.azurewebsites.net/api/cliente/${rut}`, requestOptions)
+        
+      } catch (error) {
+        Alert.alert('Alerta', 'Error en el sistema', [
+          { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+        ])
+      }
+      if (respuesta.status === 200) {
+        const body = await respuesta.json();
+        
+        setdatosCliente(body)
+        
+        
+
+      }
+    }
+
+    llamarBdCliente()
+  }, [rut])
+
+
 
 
 
@@ -60,129 +118,41 @@ const MiCuenta = ({ navigation }) => {
   return (
     <ScrollView>
       <View style={globalStyles.contenedor}>
-        <Headline style={globalStyles.titulo}> Mis Datos</Headline>
+        {datosCliente.map((cliente, key) => {
+          <Headline style={globalStyles.titulo} > Mis Datos</Headline>
+          const { nombre_cliente, apellido_pa, apellido_ma, correo, celular, contra } = cliente
+          return <View style={styles.formulario} key={key}>
 
-        <TextInput
-          label="Nombre"
-          onChangeText={texto => guardarNombre(texto)}
-          value={nombre}
-          mode="flat"
-          pointerEvents="none"
-          style={styles.input}
-          theme={{
-            colors: {
-              primary: 'black',
-              text: '#353535',
-            }
-          }}
-
-        />
-
-        <TextInput
-          label="Apellido"
-          onChangeText={texto => guardarApellido(texto)}
-          value={apellido}
-          style={styles.input}
-          mode="flat"
-          theme={{
-            colors: {
-              primary: 'black',
-              text: '#353535',
-            }
-          }}
-        />
-
-        <TextInput
-          label="Email"
-          onChangeText={texto => guardarEmail(texto)}
-          value={email}
-          style={styles.input}
-          mode="flat"
-          theme={{
-            colors: {
-              primary: 'black',
-              text: '#353535',
-            }
-          }}
-        />
-
-        <TextInput
-          label="Contraseña"
-          onChangeText={texto => guardarContraseña(texto)}
-          value={contraseña}
-          secureTextEntry
-          style={styles.input}
-          right={<TextInput.Icon name="eye" />}
-          mode="flat"
-          theme={{
-            colors: {
-              primary: 'black',
-              text: '#353535',
-            }
-          }}
-        />
+            <Text style={styles.letras}>Nombre:</Text>
+            <TextInput placeholder={nombre_cliente} placeholderTextColor={'#666'} style={styles.input}
+              onChangeText={texto => guardarNombre(texto)}
+              value={nombre_cliente} />
 
 
-        <TextInput
-          label="Teléfono"
-          onChangeText={texto => guardarTelefono(texto)}
-          value={telefono}
-          style={styles.input}
-          mode="flat"
-          theme={{
-            colors: {
-              primary: 'black',
-              text: '#353535',
-            }
-          }}
-        />
+            <Text style={styles.letras}>Apellido Paterno:</Text>
+            <TextInput placeholder={apellido_pa} placeholderTextColor={'#666'} style={styles.input}
+              onChange={(event) => guardarApellido(event.target.value)}
+              value={apellido_pa} />
 
-        <TextInput
-          label="Dirección"
-          onChangeText={texto => guardarDireccion(texto)}
-          value={direccion}
-          style={styles.input}
-          mode="flat"
-          theme={{
-            colors: {
-              primary: 'black',
-              text: '#353535',
-            }
-          }}
-        />
+            <Text style={styles.letras}>Apellido Materno:</Text>
+            <TextInput placeholder={apellido_ma} placeholderTextColor={'#666'} style={styles.input}
+              onChangeText={texto => guardarApellidoMaterno(texto)}
+              value={apellido_ma} />
 
-        <TextInput
-          label="Región"
-          onChangeText={texto => guardarRegión(texto)}
-          value={region}
-          style={styles.input}
-          mode="flat"
-          theme={{
-            colors: {
-              primary: 'black',
-              text: '#353535',
-            }
-          }}
-        />
+            <Text style={styles.letras}>Correo:</Text>
+            <TextInput placeholder={correo} placeholderTextColor={'#666'} style={styles.input}
+              onChangeText={texto => guardarCorreo(texto)}
+              value={correo} />
+
+            <Text style={styles.letras}>Contraseña:</Text>
+            <TextInput placeholder={contra} placeholderTextColor={'#666'} style={styles.input}
+              onChangeText={texto => guardarContra(texto)}
+              value={contra} />
+            
+          </View>
 
 
-        <TextInput
-          label="Comuna"
-          onChangeText={texto => guardarComuna(texto)}
-          value={comuna}
-          style={styles.input}
-          mode="flat"
-          theme={{
-            colors: {
-              primary: 'black',
-              text: '#4D4D4D',
-            }
-          }}
-        />
-
-
-
-
+        })}
 
         <Button color='#0F0E0E' style={styles.btneditarMiCuenta} onPress={() => editarCuenta()}>
           Modificar
@@ -201,9 +171,25 @@ const MiCuenta = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+  formulario: {
+    backgroundColor: '#E5E6E6',
+    marginTop: 20,
+    marginHorizontal: 40,
+
+  },
   input: {
-    marginBottom: 20,
-    backgroundColor: '#BCBCBC',
+    backgroundColor: '#FFF',
+    // borderRadius: 20,
+    color: '#000000',
+    borderWidth: 1,
+    borderColor: '#000000',
+    marginHorizontal: 20,
+    borderRadius: 8,
+
+  },
+  letras: {
+    color: '#000000',
+    textAlign: 'center',
 
   },
 
