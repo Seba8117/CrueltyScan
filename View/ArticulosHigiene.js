@@ -53,7 +53,7 @@ const ArticulosHigiene = () => {
           return  <Card.Content style={styles.carta} key={key}>
             <Title style={styles.letras} > {nom_producto} </Title>
             <Paragraph style={styles.letras}> {nom_marca} </Paragraph>
-            <Image style={styles.foto} source={require('../assets/IMG/maquillaje9colores.png')} />
+            <Image style={styles.foto} source={require('../assets/IMG/Shamphoo_Dove.jpg')} />
 
             <Button onPress={() => agregarFav()}
               style={styles.btnAgregar} color='#F1C40F' icon={require('../assets/IMG/star.png')}

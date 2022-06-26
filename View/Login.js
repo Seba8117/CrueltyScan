@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { TextInput, View, StyleSheet, Image, ScrollView, Alert } from 'react-native';
-import { Headline, Button, Paragraph, Dialog, Portal } from 'react-native-paper';
+import { TextInput, View, StyleSheet, Image, Alert } from 'react-native';
+import { Button} from 'react-native-paper';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { color } from 'react-native-reanimated';
 import globalStyles from '../style/global';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -78,7 +79,7 @@ const Login = ({ navigation }) => {
   }
 
   return (
-
+    <KeyboardAwareScrollView>
     <View style={styles.centro}>
       <Image style={styles.logo}
         source={require('../assets/IMG/Logo.png')}
@@ -124,6 +125,8 @@ const Login = ({ navigation }) => {
         > ¿Olvidaste tu contraseña?</Button>
       </View>
     </View>
+
+    </KeyboardAwareScrollView>
   )
 }
 

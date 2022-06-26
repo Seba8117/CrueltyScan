@@ -9,14 +9,14 @@ const Buscamarca = ({ navigation }) => {
 
         <ScrollView>
             <View>
-                <Text style={styles.textoBuscarMarca}>Buscar Marca</Text>
+                <Text style={styles.textoBuscarMarca}>Marcas no testeadas en animales</Text>
             </View>
 
             <Card>
                 <Card.Content style={styles.carta} >
                     <Title style={styles.letras} >Garnier</Title>
                     <Image style={styles.foto} source={require('../assets/IMG/GarnierLogo.png')} />
-                    <Paragraph style={styles.letras}>Productos a base de ingredientes naturales para el cuidado de la piel, coloración, tintes y cuidado del cabello</Paragraph>
+                    <Paragraph style={styles.letras}>Productos a base de ingredientes naturales para el cuidado de la piel, coloración, tintes y cuidado del cabello.</Paragraph>
                     <View style={styles.letraultima}>
 
                     </View>
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginTop: 20,
         marginBottom: 30,
-        fontSize: 30,
+        fontSize: 20,
         color: '#0F0E0E'
     },
 

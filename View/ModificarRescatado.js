@@ -20,7 +20,7 @@ const ModificarRescastado = ({ navigation }) => {
         <ScrollView>
             <View style={styles.fondo}>
                 <Text style={styles.titulo}>Cruelty Scan</Text>
-                <Text style={styles.texto}>Datos rescatado</Text>
+                <Text style={styles.texto}>Modificar rescatado</Text>
         
             </View>
             
