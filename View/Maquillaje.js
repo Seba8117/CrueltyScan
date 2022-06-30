@@ -3,10 +3,58 @@ import { Image, View, StyleSheet, ScrollView, Text, Pressable, Alert } from 'rea
 import { TextInput, Headline, Button, Paragraph, Dialog, Title, Menu, Card } from 'react-native-paper';
 import { AdornmentSide } from 'react-native-paper/lib/typescript/components/TextInput/Adornment/enums';
 import globalStyles from '../style/global';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-const Maquillaje = () => {
+const Maquillaje = ({ navigation }) => {
   const [datosMaquillaje, setdatosMaquillaje] = useState([])
+  const [rut, setvalue] = useState('');
+  const [cod_barra, setCodbarra] = useState('');
+  const getData = () => {
+    AsyncStorage.getItem('rut')
+      .then((rut) => {
+        setvalue(JSON.parse(rut))
+      })
+  }
+
+  const agregarFav = async () => {
+
+    console.log("Click")
+    console.log(rut)
+
+    console.log(cod_barra)
+    getData();
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "cod_barra": cod_barra,
+        "rut": rut
+      })
+    };
+    let respuesta = ''
+    try {
+      respuesta = await fetch("https://crueltyscan.azurewebsites.net/api/producto-favorito", requestOptions)
+    } catch (error) {
+      Alert.alert('Alerta', 'Error en el sistema', [
+        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+      ])
+      return;
+    }
+
+    if (respuesta.status === 200) {
+      navigation.navigate('Inicio')
+      Alert.alert('Alerta', 'Se añadio un producto a favorito', [
+        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+      ])
+      return;
+    }
+
+
+
+  }
   
   useEffect(() => {
     const llamarBdMaquillaje = async () => {
@@ -32,12 +80,6 @@ const Maquillaje = () => {
   }, [])
 
 
-
-  const agregarFav = () => {
-    Alert.alert('Alerta', 'Se agregó el producto a favoritos', [
-      { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
-    ])
-  }
   return (
     <ScrollView >
       <View>
@@ -48,14 +90,15 @@ const Maquillaje = () => {
 
       <Card>
         {datosMaquillaje.map((maquillaje, key) => {
-          const { nom_producto,nom_marca } = maquillaje
+          const { nom_producto,nom_marca,cod_barra } = maquillaje
 
           return  <Card.Content style={styles.carta} key={key}>
             <Title style={styles.letras} > {nom_producto} </Title>
+            <Paragraph style={styles.letras}> {cod_barra} </Paragraph>
             <Paragraph style={styles.letras}> {nom_marca} </Paragraph>
             <Image style={styles.foto} source={require('../assets/IMG/MascaraPestaña_catrice.jpg')} />
 
-            <Button onPress={() => agregarFav()}
+            <Button onPress={() => { agregarFav(); setCodbarra(cod_barra) }}
               style={styles.btnAgregar} color='#F1C40F' icon={require('../assets/IMG/star.png')}
             > Agregar a favoritos</Button>
 

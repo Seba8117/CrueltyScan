@@ -6,25 +6,43 @@ const RegistroProducto = ({ navigation }) => {
     const [test, guardarTest] = useState('');
     const [marca, guardarMarca] = useState('');
     const [categoria, guardarCategoria] = useState('');
+    const [cod_barra, guardarCodigo] = useState('');
 
-    const registrarProducto = () => {
+    const registrarProducto = async () => {
 
-        //Validar
-        if (nombreProducto === '' || test === '' || marca === '' ||
-            categoria === '') {
-            Alert.alert('Alerta', 'Hay campos vacios.', [
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "cod_barra": cod_barra,
+                "nom_producto": nombreProducto,
+                "test": false,
+                "id_categoria": 1,
+                "id_marca": 1
+
+
+            })
+        };
+        let respuesta = ''
+        try {
+            respuesta = await fetch("https://crueltyscan.azurewebsites.net/api/productos", requestOptions)
+        } catch (error) {
+            Alert.alert('Alerta', 'Error en el sistema', [
                 { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
             ])
             return;
         }
-        else {
-            Alert.alert('Alerta', 'Registro exitoso.', [
-                { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
-            ])
+
+        if (respuesta.status === 200) {
             navigation.navigate('MenuAdmin')
+            Alert.alert('Alerta', 'Se registro producto', [
+                { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+            ])
             return;
-
         }
+
 
     }
     return (
@@ -35,12 +53,18 @@ const RegistroProducto = ({ navigation }) => {
             </View>
             <View>
 
+                <Text style={styles.letras}>Codigo de barra:  </Text>
+                <TextInput placeholder='Ej: 12213142341877' placeholderTextColor={'#666'} style={styles.input}
+                    onChangeText={texto => guardarCodigo(texto)}
+                    value={cod_barra} />
+
+
                 <Text style={styles.letras}>Nombre Producto:  </Text>
                 <TextInput placeholder='Ej: Argan' placeholderTextColor={'#666'} style={styles.input}
                     onChangeText={texto => guardarNombreProducto(texto)}
                     value={nombreProducto} />
 
-                <Text style={styles.letras}>Testeado en animal: </Text>
+                {/* <Text style={styles.letras}>Testeado en animal: </Text>
                 <TextInput placeholder='Si/No' placeholderTextColor={'#666'} style={styles.input}
                     onChangeText={texto => guardarTest(texto)}
                     value={test} />
@@ -53,7 +77,7 @@ const RegistroProducto = ({ navigation }) => {
                 <Text style={styles.letras}>Categoria: </Text>
                 <TextInput placeholder='Seleccione categoria' placeholderTextColor={'#666'} style={styles.input}
                     onChangeText={texto => guardarCategoria(texto)}
-                    value={categoria} />
+                    value={categoria} /> */}
 
 
 

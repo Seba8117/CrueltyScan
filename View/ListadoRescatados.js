@@ -1,9 +1,49 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Modal, Text, Button, View, StyleSheet, TextInput, Pressable, SafeAreaView, ScrollView } from 'react-native'
+import { Headline, Card, Title, Paragraph, Dialog, Portal, Menu, Searchbar } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const ListadoRescatados = ({ navigation }) => {
-    
-    const visitarModificarRescatado = () => {
-        navigation.navigate('ModificarRescatado')
+
+    const [datosMascota, setDatosMascota] = useState([]);
+    const [datosId, setDatosid]= useState(null);
+    useEffect(() => {
+        const llamarBdMascotas = async () => {
+            const requestOptions = {
+                method: 'GET',
+
+            };
+            let respuesta
+            try {
+                respuesta = await fetch("https://crueltyscan.azurewebsites.net/api/mascotas", requestOptions)
+            } catch (error) {
+                Alert.alert('Alerta', 'Error en el sistema', [
+                    { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+                ])
+            }
+            if (respuesta.status === 200) {
+                const body = await respuesta.json();
+                setDatosMascota(body)
+            }
+        }
+
+        llamarBdMascotas()
+    }, [datosMascota])
+
+
+
+
+    const visitarModificarRescatado = async() => {
+        if(datosId===null){
+            console.log(datosId)
+        }
+        else{
+            await AsyncStorage.setItem('id_mascota',  JSON.stringify(datosId));
+            console.log("se guardó")
+            console.log(datosId )
+            navigation.navigate('ModificarRescatado')
+            
+        }
+        
     }
 
     return (
@@ -12,22 +52,24 @@ const ListadoRescatados = ({ navigation }) => {
                 <Text style={styles.titulo}>Cruelty Scan</Text>
                 <Text style={styles.texto}>Listado Rescatados  </Text>
             </View>
-            <View>
-                <Pressable onPress={() => visitarModificarRescatado()} >
-                    <Text style={styles.texto2} >ID: 10 </Text>
-                </Pressable>
 
-                <Pressable onPress={() => visitarModificarRescatado()}  >
-                    <Text style={styles.texto2} >ID: 11 </Text>
-                </Pressable>
+            <Card>
+                {datosMascota.map((mascota, key) => {
+                    const { id_animal, nombre } = mascota
 
+                    return <Card.Content style={styles.carta} key={key}>
+                        <Title style={styles.letras} >ID Mascota: {id_animal} </Title>
+                        <Paragraph style={styles.letras}>Nombre: {nombre} </Paragraph>
+                        <Pressable onPress={() => { visitarModificarRescatado(); setDatosid(id_animal) }}  >
+                            <Text style={styles.texto2} > Editar</Text>
+                        </Pressable>
 
-                <Pressable  onPress={() => visitarModificarRescatado()}>
-                    <Text style={styles.texto2} >ID: 12</Text>
-                </Pressable>
+                    </Card.Content>
 
+                })}
 
-            </View>
+            </Card>
+
 
         </ScrollView>
 
@@ -38,6 +80,19 @@ const ListadoRescatados = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+    carta: {
+        backgroundColor: '#E5E6E6',
+        borderWidth: 1,
+        borderColor: '#000000',
+        textAlign: 'center',
+        alignItems: 'center', 
+
+    },
+    letras: {
+        color: '#000000',
+        textAlign: 'center',
+
+    },
     titulo: {
         marginTop: 50,
         textAlign: 'center',
@@ -60,7 +115,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         fontSize: 18,
         textAlign: 'center',
-        marginVertical: 40
+        marginVertical: 30
 
     },
     letras: {

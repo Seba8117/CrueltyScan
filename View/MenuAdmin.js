@@ -10,7 +10,7 @@ const MenuAdmin = ({ navigation }) => {
         navigation.navigate('RegistroMarca')
     }
     const visitarEliminarMarcas = () => {
-        navigation.navigate('EliminarMarcas')
+        navigation.navigate('ListaMarcas')
     }
     const visitarListadoRescatados = () => {
         navigation.navigate('ListadoRescatados')
@@ -72,10 +72,10 @@ const MenuAdmin = ({ navigation }) => {
                 </View>
 
                 <View>
-                <Card style={styles.fondo}>
+                {/* <Card style={styles.fondo}>
                     <Image style={styles.foto} source={require('../assets/IMG/adopcion.png')}/>
                     <Button style={styles.btnMa5}  onPress={() => visitarListadoRescatados()}>Administrar Adopciones</Button> 
-                </Card>
+                </Card> */}
                 </View>
 
 

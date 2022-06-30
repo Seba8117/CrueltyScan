@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { TextInput,Image, View, StyleSheet, ScrollView, Text, Pressable, Alert } from 'react-native';
-import {  Headline, Button, Paragraph, Dialog, Title, Menu, Card } from 'react-native-paper';
-const BuscarMarcaAdmin = ({ navigation }) => {
+import {  TextInput,Image, View, StyleSheet, ScrollView, Text, Pressable, Alert } from 'react-native';
+import { Headline, Button, Paragraph, Dialog, Title, Menu, Card } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const ListaMarcas = ({ navigation }) => {
     const [datosMarca, setdatosMarca] = useState([])
+   
+    const [datosId, setDatosid]= useState(null);
     const [busca, setBusca] = useState('')
+
+    const eliminarData = () => {
+        AsyncStorage.removeItem('id_marca')
+      }
+   
+    
     useEffect(() => {
         
         const llamarBdMarca = async () => {
@@ -24,10 +33,24 @@ const BuscarMarcaAdmin = ({ navigation }) => {
                 setdatosMarca(body)
             }
         }
-     
+        eliminarData()
         llamarBdMarca()
     }, [])
+
     
+    const visitarModificar = async() => {
+        if(datosId===null){
+            console.log(datosId)
+        }
+        else{
+            await AsyncStorage.setItem('id_marca',  JSON.stringify(datosId));
+            console.log("se guardó")
+            console.log(datosId)
+            navigation.navigate('EliminarMarcas')
+            
+        }
+        
+    }
     const Buscar = async () => {
         const myHeaders = new Headers();
         myHeaders.append("nombre_marca", busca)
@@ -58,7 +81,8 @@ const BuscarMarcaAdmin = ({ navigation }) => {
 
         llamarBdMarca()
     }
-    
+
+
 
 
 
@@ -67,9 +91,8 @@ const BuscarMarcaAdmin = ({ navigation }) => {
 
         <ScrollView>
             <View>
-                <Text style={styles.textoBuscarMarca}>Marcas no testeadas en animales</Text>
+                <Text style={styles.textoBuscarMarca}>Lista Marcas</Text>
             </View>
-
             <TextInput placeholder='Ingrese una marca' placeholderTextColor={'#666'} style={styles.input}
                 onChangeText={texto => setBusca(texto)}
                 value={busca}
@@ -84,11 +107,15 @@ const BuscarMarcaAdmin = ({ navigation }) => {
 
             <Card>
                 {datosMarca.map((marca, key) => {
-                    const { nom_marca, descripcion } = marca
+                    const { nom_marca, descripcion,id_marca } = marca
                     return <Card.Content style={styles.carta} key={key}>
                         <Title style={styles.letras} >{nom_marca} </Title>
                         <Image style={styles.foto} source={require('../assets/IMG/GarnierLogo.png')} />
-                        <Paragraph style={styles.letras}>{descripcion} </Paragraph>
+                        <Paragraph style={styles.letras}>Descripcion: {descripcion} </Paragraph>
+                        <Paragraph style={styles.letras}>Id:{id_marca} </Paragraph>
+                        <Button onPress={() => { visitarModificar(); setDatosid(id_marca) }}
+                            style={styles.btnAgregar}  color='#F1C40F' 
+                        > Modificar</Button>
                         <View style={styles.letraultima}>
 
                         </View>
@@ -115,19 +142,7 @@ const styles = StyleSheet.create({
 
 
     },
-    input: {
-        marginLeft: 50,
-        marginRight: 50,
-        backgroundColor: '#FFF',
-        // borderRadius: 20,
-        color: '#000000',
-        borderWidth: 1,
-        borderColor: '#000000',
-        marginHorizontal: 20
-
-
-
-    },
+    
     textoBuscarMarca: {
         textAlign: 'center',
         marginTop: 20,
@@ -157,7 +172,8 @@ const styles = StyleSheet.create({
 
     btnAgregar: {
         marginHorizontal: 30,
-        marginVertical: 10
+        marginVertical: 10,
+        backgroundColor:'#000000'
     },
     letraultima: {
         color: '#000000',
@@ -165,12 +181,22 @@ const styles = StyleSheet.create({
         marginVertical: 20
 
     },
+    input: {
+        marginLeft: 50,
+        marginRight: 50,
+        backgroundColor: '#FFF',
+        // borderRadius: 20,
+        color: '#000000',
+        borderWidth: 1,
+        borderColor: '#000000',
+        marginHorizontal: 20
+
+
+
+    },
 
 
 
 })
 
-export default BuscarMarcaAdmin
-
-
-
+export default ListaMarcas

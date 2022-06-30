@@ -3,26 +3,50 @@ import React, { useState } from 'react'
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import { TextInput, Headline, Button, Paragraph, Dialog, Portal } from 'react-native-paper';
 import globalStyles from '../style/global';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
-const RecupContr = () => {
+const RecupContr = ({ navigation }) => {
   const [email, guardarEmail] = useState('');
   //const [alerta, guardarAlerta] = useState('false');
 
 
-  const EnviarCorreo = () => {
+  const EnviarCorreo = async() => {
+
+    await AsyncStorage.setItem('correo',  JSON.stringify(email));
+            console.log("se guardó")
+            console.log(email)
+            
     if (email === '') {
       Alert.alert('Campo vacio', 'Porfavor escriba su correo y reintente.', [
         { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
       ])
       return;
     }
-    else {
-      Alert.alert('Alerta', 'Se envio un correo con los pasos a seguir.', [
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "correo": email
+      })
+    };
+    let respuesta = ''
+    try {
+      respuesta = await fetch("https://crueltyscan.azurewebsites.net/api/recuperar-clave/paso1", requestOptions)
+    } catch (error) {
+      Alert.alert('Alerta', 'Error en el sistema', [
         { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
       ])
       return;
+    }
 
+    if (respuesta.status === 200) {
+      navigation.navigate('ValidacionCodigo')
+      Alert.alert('Alerta', 'Se envio un codigo a su correo para recuperar contraseña', [
+        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+      ])
+      return;
     }
 
   }

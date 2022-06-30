@@ -1,12 +1,47 @@
 import React, { useState }  from 'react'
-import { TextInput, View, StyleSheet, Text, Image} from 'react-native';
+import { TextInput, View, StyleSheet, Text, Image,Alert} from 'react-native';
 import { Button} from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 
-const ValidacionCodigo = () => {
+const ValidacionCodigo = ({ navigation }) => {
 
-  const [codigo, enviarCodigo] = useState('');
+  const [codigo, setCodigo] = useState('');
+  const enviarCodigo = async() => {
+    if (codigo === '') {
+      Alert.alert('Campo vacio', 'Porfavor escriba su correo y reintente.', [
+        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+      ])
+      return;
+    }
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "codigo": codigo
+      })
+    };
+    let respuesta = ''
+    try {
+      respuesta = await fetch("https://crueltyscan.azurewebsites.net/api/recuperar-clave/paso2", requestOptions)
+    } catch (error) {
+      Alert.alert('Alerta', 'Error en el sistema', [
+        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+      ])
+      return;
+    }
+
+    if (respuesta.status === 200) {
+      navigation.navigate('NuevaContra')
+      Alert.alert('Alerta', 'Se ha validado su codigo', [
+        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+      ])
+      return;
+    }
+
+  }
 
   return (
     <KeyboardAwareScrollView>
@@ -25,7 +60,7 @@ const ValidacionCodigo = () => {
                 placeholder=''
                 placeholderTextColor={'#666'}
                 style={styles.input}
-                onChangeText={texto => enviarCodigo(texto)}
+                onChangeText={texto => setCodigo(texto)}
                 value={codigo}
                 textAlign={'center'}
         

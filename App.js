@@ -43,7 +43,10 @@ import ModificarRescatado from './View/ModificarRescatado';
 import BuscarMarcaAdmin from './View/BuscarMarcaAdmin';
 import RegistroProducto from './View/RegistroProducto';
 import EliminarProductos from './View/EliminarProductos';
+import ListaMarcas from './View/ListaMarcas';
 import Buscamarca from './View/Buscamarca';
+import ValidacionCodigo from './View/ValidacionCodigo';
+import NuevaContra from './View/NuevaContraseña';
 
 
 
@@ -65,8 +68,68 @@ const App = () => {
             initialRouteName='Login' //Cambiar pagina 
           >
             <Stack.Screen
+              name="NuevaContra"
+              component={NuevaContra}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                padding: 50,
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+
+
+            />
+            <Stack.Screen
+              name="ValidacionCodigo"
+              component={ValidacionCodigo}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                padding: 50,
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+
+
+            />
+            <Stack.Screen
               name="Buscamarca"
               component={Buscamarca}
+              options={{
+                title: 'Crueltly Scan',
+                headerTitleAlign: 'center',
+                padding: 50,
+                headerStyle: {
+                  backgroundColor: '#c1f4c5'
+
+                },
+                headerTintColor: '#0F0E0E',
+                headerTitleStyle: {
+                  fontWeight: 'bold'
+                }
+              }}
+
+
+
+            />
+             <Stack.Screen
+              name="ListaMarcas"
+              component={ListaMarcas}
               options={{
                 title: 'Crueltly Scan',
                 headerTitleAlign: 'center',

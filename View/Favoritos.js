@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Favoritos = ({ navigation }) => {
   
   const [datosFav, setDatosfav] = useState([])
+  const [codBarra, setCodbarra] = useState('')
 
   const getData = () => {
       AsyncStorage.getItem('rut')
@@ -17,12 +18,14 @@ const Favoritos = ({ navigation }) => {
 
   } 
   const [rut, setvalue] = useState(null);
+  getData();
   console.log(rut)
+  console.log(codBarra)
 
   useEffect(() => {
     
     const llamarBdFav = async () => {
-      getData();
+      
       const myHeadars = new Headers();
       const requestOptions = {
         method: 'GET',
@@ -44,6 +47,40 @@ const Favoritos = ({ navigation }) => {
     
     llamarBdFav()
   }, [rut])
+  
+  const eliminarFav = async () => {
+    console.log("Click")
+    const requestOptions = {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "cod_barra": codBarra,
+        "rut": rut
+      })
+    };
+    let respuesta = ''
+    try {
+      respuesta = await fetch("https://crueltyscan.azurewebsites.net/api/producto-favorito", requestOptions)
+    } catch (error) {
+      Alert.alert('Alerta', 'Error en el sistema', [  
+        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+      ])
+      return;
+    }
+
+    if (respuesta.status === 200) {
+      navigation.navigate('Inicio')
+      Alert.alert('Alerta', 'Se eliminó un producto a favorito', [
+        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+      ])
+      return;
+    }
+
+
+
+  }
 
 
   return (
@@ -60,7 +97,7 @@ const Favoritos = ({ navigation }) => {
             <Image style={styles.foto} source={require('../assets/IMG/maquillaje9colores.png')} />
             <View style={styles.centro}>
 
-              <Button onPress={() => eliminarFav()}
+              <Button onPress={() =>{eliminarFav(); setCodbarra(cod_barra)}}
                 style={styles.btnEliminar} color='#0F0E0E' icon={require('../assets/IMG/tarro.png')}
               >Eliminar</Button>
 
