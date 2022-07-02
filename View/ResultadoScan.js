@@ -3,69 +3,86 @@ import { View, StyleSheet, ScrollView, Text, Image } from 'react-native';
 import { TextInput, Headline, Button, Paragraph, Dialog, Title, Menu, Card } from 'react-native-paper';
 import { AdornmentSide } from 'react-native-paper/lib/typescript/components/TextInput/Adornment/enums';
 import globalStyles from '../style/global';
-
+import ObtenerImagenMarca from './utils/ObtenerImagenMarca'
 
 const ResultadoScan = ({ route, navigation }) => {
     const { barcode } = route.params;
-    const [data, setData] = useState({})
+    const [data, setData] = useState(false)
+    const [noEncontrado, setnoEncontrado] = useState(false)
+    const getData = () => {
+        AsyncStorage.getItem('rut')
+            .then((rut) => {
+                setvalue(JSON.parse(rut))
+            })
+    }
 
     useEffect(() => {
         const buscarProducto = async () => {
             const requestOptions = {
-                method: 'GET',
-                redirect: 'follow'
+                method: 'GET'
             };
             let respuesta
             try {
-                respuesta = await fetch(`http://192.168.18.203:3000/api/productos/${barcode}`, requestOptions)
+                respuesta = await fetch(`https://crueltyscan.azurewebsites.net/api/productos/${barcode}`, requestOptions)
             } catch (error) {
                 console.log(error)
             }
+
             const body = await respuesta.json();
-            setData(body[0])
+            if (body.length > 0) {
+                setData(body[0])
+            } else {
+                setnoEncontrado(true)
+            }
+
+
         }
 
         buscarProducto()
-        console.log(data)
     }, [])
-    console.log(data)
+
     return (
         <View>
             {
-                data.test === 0 && <View style={styles.container}>
+                data && data.test === 1 && <View style={styles.container}>
                     <Image style={styles.logoLibre}
                         source={require('../assets/IMG/crueldad.png')} />
                 </View>
             }
             {
-                data.test === 1 && <View style={styles.container}>
+                data && data.test === 0 && <View style={styles.container}>
                     <Image style={styles.logoLibre}
                         source={require('../assets/IMG/libre.png')} />
                 </View>
             }
+            {data && data.nom_marca && data.nom_producto &&
+                <View style={styles.resultado}>
+                    <Image style={styles.imageResult}
+                        source={ObtenerImagenMarca(data.nom_marca)}
+                    />
+                    <View style={styles.contenedorTexto}>
 
-            <View style={styles.resultado}>
-                <Image style={styles.imageResult}
-                    source={require('../assets/IMG/GarnierLogo.png')}
-                />
+                        <Text style={styles.textoMarca}>{data.nom_marca}</Text>
+                        <Text style={styles.textoProducto}>{data.nom_producto}</Text>
+                    </View>
 
-                <View style={styles.contenedorTexto}>
-                    <Text style={styles.textoMarca}>{data.nom_marca}</Text>
-                    <Text style={styles.textoProducto}>{data.nom_producto}</Text>
-                </View>
-            </View>
+                </View>}
 
             {
-                data.test === 0 && <View style={styles.fondoColorTesteo}>
+                data && data.test === 1 && <View style={styles.fondoColorTesteo}>
                     <Text style={styles.textoFondoTesteo}>Esta marca testea en animales!!</Text>
                 </View>
             }
 
             {
-                data.test === 1 && <View style={styles.fondoColorNoTesteo}>
+                data && data.test === 0 && <View style={styles.fondoColorNoTesteo}>
                     <Text style={styles.textoFondoNoTesteo}>Esta marca es libre de crueldad animal! No prueba en animales</Text>
                 </View>
             }
+
+            {noEncontrado && <View style={styles.fondoColorTesteo}>
+                <Text style={styles.textoFondoNoTesteo}>Producto no encontrado</Text>
+            </View>}
         </View>
     );
 };

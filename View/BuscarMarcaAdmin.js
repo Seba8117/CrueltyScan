@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { TextInput,Image, View, StyleSheet, ScrollView, Text, Pressable, Alert } from 'react-native';
-import {  Headline, Button, Paragraph, Dialog, Title, Menu, Card } from 'react-native-paper';
+import { TextInput, Image, View, StyleSheet, ScrollView, Text, Pressable, Alert } from 'react-native';
+import { Headline, Button, Paragraph, Dialog, Title, Menu, Card } from 'react-native-paper';
+import ObtenerImagenMarca from './utils/ObtenerImagenMarca'
+
 const BuscarMarcaAdmin = ({ navigation }) => {
     const [datosMarca, setdatosMarca] = useState([])
     const [busca, setBusca] = useState('')
     useEffect(() => {
-        
+
         const llamarBdMarca = async () => {
             const requestOptions = {
                 method: 'GET',
@@ -24,10 +26,10 @@ const BuscarMarcaAdmin = ({ navigation }) => {
                 setdatosMarca(body)
             }
         }
-     
+
         llamarBdMarca()
     }, [])
-    
+
     const Buscar = async () => {
         const myHeaders = new Headers();
         myHeaders.append("nombre_marca", busca)
@@ -48,7 +50,7 @@ const BuscarMarcaAdmin = ({ navigation }) => {
                 const body = await respuesta.json();
                 setdatosMarca(body)
             }
-            else{
+            else {
                 Alert.alert('Alerta', 'Error en el sistema', [
                     { text: 'Cerrar', onPress: () => console.log('No se encontro la marca.') }
                 ])
@@ -58,7 +60,7 @@ const BuscarMarcaAdmin = ({ navigation }) => {
 
         llamarBdMarca()
     }
-    
+
 
 
 
@@ -79,7 +81,7 @@ const BuscarMarcaAdmin = ({ navigation }) => {
             <Button onPress={() => Buscar()}
                 style={styles.btnbuscar} color='#0F0E0E'
                 icon={require('../assets/IMG/buscar.png')}
-                
+
             >Buscar una marca</Button>
 
             <Card>
@@ -87,7 +89,7 @@ const BuscarMarcaAdmin = ({ navigation }) => {
                     const { nom_marca, descripcion } = marca
                     return <Card.Content style={styles.carta} key={key}>
                         <Title style={styles.letras} >{nom_marca} </Title>
-                        <Image style={styles.foto} source={require('../assets/IMG/GarnierLogo.png')} />
+                        <Image style={styles.foto} source={ObtenerImagenMarca(nom_marca)} />
                         <Paragraph style={styles.letras}>{descripcion} </Paragraph>
                         <View style={styles.letraultima}>
 
@@ -109,8 +111,8 @@ const BuscarMarcaAdmin = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     btnbuscar: {
-        marginTop:20,
-        marginVertical:10,
+        marginTop: 20,
+        marginVertical: 10,
 
 
 

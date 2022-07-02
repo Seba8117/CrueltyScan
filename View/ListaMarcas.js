@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import {  TextInput,Image, View, StyleSheet, ScrollView, Text, Pressable, Alert } from 'react-native';
+import { TextInput, Image, View, StyleSheet, ScrollView, Text, Pressable, Alert } from 'react-native';
 import { Headline, Button, Paragraph, Dialog, Title, Menu, Card } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import ObtenerImagenMarca from './utils/ObtenerImagenMarca'
 const ListaMarcas = ({ navigation }) => {
     const [datosMarca, setdatosMarca] = useState([])
-   
-    const [datosId, setDatosid]= useState(null);
+
+    const [datosId, setDatosid] = useState(null);
     const [busca, setBusca] = useState('')
 
     const eliminarData = () => {
         AsyncStorage.removeItem('id_marca')
-      }
-   
-    
+    }
+
+
     useEffect(() => {
-        
+
         const llamarBdMarca = async () => {
             const requestOptions = {
                 method: 'GET',
@@ -37,19 +38,19 @@ const ListaMarcas = ({ navigation }) => {
         llamarBdMarca()
     }, [])
 
-    
-    const visitarModificar = async() => {
-        if(datosId===null){
+
+    const visitarModificar = async () => {
+        if (datosId === null) {
             console.log(datosId)
         }
-        else{
-            await AsyncStorage.setItem('id_marca',  JSON.stringify(datosId));
+        else {
+            await AsyncStorage.setItem('id_marca', JSON.stringify(datosId));
             console.log("se guardó")
             console.log(datosId)
             navigation.navigate('EliminarMarcas')
-            
+
         }
-        
+
     }
     const Buscar = async () => {
         const myHeaders = new Headers();
@@ -71,7 +72,7 @@ const ListaMarcas = ({ navigation }) => {
                 const body = await respuesta.json();
                 setdatosMarca(body)
             }
-            else{
+            else {
                 Alert.alert('Alerta', 'Error en el sistema', [
                     { text: 'Cerrar', onPress: () => console.log('No se encontro la marca.') }
                 ])
@@ -102,19 +103,19 @@ const ListaMarcas = ({ navigation }) => {
             <Button onPress={() => Buscar()}
                 style={styles.btnbuscar} color='#0F0E0E'
                 icon={require('../assets/IMG/buscar.png')}
-                
+
             >Buscar una marca</Button>
 
             <Card>
                 {datosMarca.map((marca, key) => {
-                    const { nom_marca, descripcion,id_marca } = marca
+                    const { nom_marca, descripcion, id_marca } = marca
                     return <Card.Content style={styles.carta} key={key}>
                         <Title style={styles.letras} >{nom_marca} </Title>
-                        <Image style={styles.foto} source={require('../assets/IMG/GarnierLogo.png')} />
+                        <Image style={styles.foto} source={ObtenerImagenMarca(nom_marca)} />
                         <Paragraph style={styles.letras}>Descripcion: {descripcion} </Paragraph>
                         <Paragraph style={styles.letras}>Id:{id_marca} </Paragraph>
                         <Button onPress={() => { visitarModificar(); setDatosid(id_marca) }}
-                            style={styles.btnAgregar}  color='#F1C40F' 
+                            style={styles.btnAgregar} color='#F1C40F'
                         > Modificar</Button>
                         <View style={styles.letraultima}>
 
@@ -136,13 +137,13 @@ const ListaMarcas = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     btnbuscar: {
-        marginTop:20,
-        marginVertical:10,
+        marginTop: 20,
+        marginVertical: 10,
 
 
 
     },
-    
+
     textoBuscarMarca: {
         textAlign: 'center',
         marginTop: 20,
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
     btnAgregar: {
         marginHorizontal: 30,
         marginVertical: 10,
-        backgroundColor:'#000000'
+        backgroundColor: '#000000'
     },
     letraultima: {
         color: '#000000',

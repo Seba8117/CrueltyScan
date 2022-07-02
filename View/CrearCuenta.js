@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { TextInput, View, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Headline, Button, Paragraph, Dialog, Portal } from 'react-native-paper';
 import globalStyles from '../style/global';
@@ -6,10 +6,8 @@ import DropDownPicker from 'react-native-dropdown-picker';
 
 
 const CrearCuenta = ({ navigation }) => {
-
   //Campos formulario
   const [rut, guardarRut] = useState('');
-  const [id_comuna, guardarIdComuna] = useState(1);
   const [nombre, guardarNombre] = useState('');
   const [apellido, guardarApellido] = useState('');
   const [apellidoMaterno, guardarApellidoMaterno] = useState('');
@@ -18,34 +16,68 @@ const CrearCuenta = ({ navigation }) => {
   const [contraseña, guardarContraseña] = useState('');
 
 
+  const [abrirRegiones, setAbrirRegiones] = useState(false);
+  const [abrirComunas, setAbrirComunas] = useState(false);
+  const [regiones, setRegiones] = useState([])
+  const [valorRegionSelect, setValorRegionSelect] = useState()
+  const [comunas, setComunas] = useState([])
+  const [valorComunaSelect, setValorComunaSelect] = useState()
 
+  useEffect(() => {
+    const llamarApiRegion = async () => {
+      var requestOptions = {
+        method: 'GET',
+      };
 
+      const respuesta = await fetch("https://crueltyscan.azurewebsites.net/api/regiones", requestOptions)
+      if (respuesta.status === 200) {
+        let apiRegiones = []
+        const body = await respuesta.json();
+        body.forEach(region => {
+          apiRegiones.push({
+            label: region.nom_region,
+            value: region.id_region
+          })
+        })
+        setRegiones(apiRegiones)
+      }
 
+    }
 
+    llamarApiRegion()
+  }, [])
 
+  useEffect(() => {
+    const llamarApiComuna = async () => {
+      var requestOptions = {
+        method: 'GET',
+      };
 
-  const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
-    const [items, setItems] = useState([
-      { label: 'Conchali', value: 'Conchali' },
-      { label: 'Renca', value: 'Renca' }
-    ]);
-    const [abrir, setAbrir] = useState(false);
-    const [valor, setValor] = useState(null);
-    const [item, setItem] = useState([
-      { label: 'Metropolitana', value: 'Metropolitana' },
-      { label: 'Los Lagos', value: 'LosLagos' }
-    ]);
+      const respuesta = await fetch(`https://crueltyscan.azurewebsites.net/api/comunas/${valorRegionSelect}`, requestOptions)
+      if (respuesta.status === 200) {
+        let apiComunas = []
+        const body = await respuesta.json();
+        body.forEach(region => {
+          apiComunas.push({
+            label: region.nom_comuna,
+            value: region.id_comuna
+          })
+        })
+        setComunas(apiComunas)
+      }
 
+    }
+    if (valorRegionSelect) {
+      llamarApiComuna()
+    }
+  }, [valorRegionSelect])
 
 
   //Almacena al usuario en la base de datos 
-  const registrarseUsuario = async() => {
-    
-
+  const registrarseUsuario = async () => {
     //Validar
-    if (rut === '' ||nombre === '' || apellido === '' || email === '' ||
-      contraseña === '' || telefono === ''  || apellidoMaterno === '') {
+    if (rut === '' || nombre === '' || apellido === '' || email === '' ||
+      contraseña === '' || telefono === '' || apellidoMaterno === '') {
       Alert.alert('Alerta', 'Hay campos vacios.', [
         { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
       ])
@@ -57,20 +89,22 @@ const CrearCuenta = ({ navigation }) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        "rut":rut,
-        "id_comuna": id_comuna, 
-        "nombre_cliente": nombre, 
-        "apellido_pa": apellido, 
-        "apellido_ma": apellidoMaterno, 
+        "rut": rut,
+        "id_comuna": valorComunaSelect,
+        "nombre_cliente": nombre,
+        "apellido_pa": apellido,
+        "apellido_ma": apellidoMaterno,
         "correo": email,
-        "celular":telefono,
-        "contra":contraseña
-
+        "celular": telefono,
+        "contra": contraseña
       })
     };
     let respuesta = ''
+    console.log(valorComunaSelect)
+    console.log(requestOptions)
     try {
       respuesta = await fetch("https://crueltyscan.azurewebsites.net/api/cliente", requestOptions)
+      console.log(respuesta)
     } catch (error) {
       Alert.alert('Alerta', 'Error en el sistema', [
         { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
@@ -79,18 +113,13 @@ const CrearCuenta = ({ navigation }) => {
     }
 
     if (respuesta.status === 200) {
-        navigation.navigate('Login')
-        Alert.alert('Alerta', 'Se registro usuario', [
-          { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
-        ])
-        return;
-      }
-    
-
+      navigation.navigate('Login')
+      Alert.alert('Alerta', 'Se registro usuario', [
+        { text: 'Cerrar', onPress: () => console.log('se cerro la alerta') }
+      ])
+      return;
+    }
   }
-
-
-
 
   return (
     <ScrollView>
@@ -102,6 +131,7 @@ const CrearCuenta = ({ navigation }) => {
           placeholderTextColor={'#666'}
           style={styles.input}
           onChangeText={texto => guardarRut(texto)}
+          maxLength={10}
           value={rut}
 
         />
@@ -111,8 +141,8 @@ const CrearCuenta = ({ navigation }) => {
           placeholderTextColor={'#666'}
           style={styles.input}
           onChangeText={texto => guardarNombre(texto)}
+          maxLength={30}
           value={nombre}
-
         />
 
         <TextInput
@@ -120,6 +150,7 @@ const CrearCuenta = ({ navigation }) => {
           value={apellido}
           style={styles.input}
           placeholder='Apellido Paterno'
+          maxLength={30}
           placeholderTextColor={'#666'}
         />
         <TextInput
@@ -127,6 +158,7 @@ const CrearCuenta = ({ navigation }) => {
           value={apellidoMaterno}
           style={styles.input}
           placeholder='Apellido Materno'
+          maxLength={30}
           placeholderTextColor={'#666'}
         />
 
@@ -135,6 +167,7 @@ const CrearCuenta = ({ navigation }) => {
           value={email}
           style={styles.input}
           placeholder='Correo'
+          maxLength={45}
           placeholderTextColor={'#666'}
         />
 
@@ -144,6 +177,7 @@ const CrearCuenta = ({ navigation }) => {
           secureTextEntry
           style={styles.input}
           placeholder='Contraseña'
+          maxLength={15}
           placeholderTextColor={'#666'}
         // right={<TextInput.Icon name="eye" />}
         />
@@ -154,33 +188,51 @@ const CrearCuenta = ({ navigation }) => {
           value={telefono}
           style={styles.input}
           placeholder='Telefono'
+          maxLength={9}
           placeholderTextColor={'#666'}
-
         />
-        
+
         <DropDownPicker
+          open={abrirRegiones}
+          value={valorRegionSelect}
+          items={regiones}
+          setOpen={setAbrirRegiones}
+          setValue={setValorRegionSelect}
           placeholder='Region'
           placeholderTextColor={'#666'}
           style={styles.input}
-          open={abrir} 
-          value={valor}
-          items={item}
-          setValue={setValor}
-          setItems={setItem}
-          setOpen={setAbrir}
+          closeAfterSelecting={true}
+          closeOnBackPressed={true}
+          itemSeparator={true}
+          selectedItemContainerStyle={{
+            backgroundColor: "#caca"
+          }}
+          listMode="SCROLLVIEW"
+          modalProps={{
+            animationType: "fade"
+          }}
         />
 
-
         <DropDownPicker
+          open={abrirComunas}
+          value={valorComunaSelect}
+          items={comunas}
+          setOpen={setAbrirComunas}
+          setValue={setValorComunaSelect}
           placeholder='Comuna'
           placeholderTextColor={'#666'}
           style={styles.input}
-          open={open}
-          value={value}
-          items={items}
-          setValue={setValue}
-          setItems={setItems}
-          setOpen={setOpen}
+          closeAfterSelecting={true}
+          closeOnBackPressed={true}
+          itemSeparator={true}
+          selectedItemContainerStyle={{
+            backgroundColor: "#caca"
+          }}
+          listMode="SCROLLVIEW"
+          modalProps={{
+            animationType: "fade"
+          }}
+          disabled={comunas.length > 0 ? false : true}
         />
 
         <Button color='#0F0E0E' style={styles.btnregistrarUsu} onPress={() => registrarseUsuario()}>

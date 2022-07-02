@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { TextInput, View, StyleSheet, Image, Alert } from 'react-native';
-import { Button} from 'react-native-paper';
+import { Button } from 'react-native-paper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { color } from 'react-native-reanimated';
 import globalStyles from '../style/global';
@@ -50,16 +50,16 @@ const Login = ({ navigation }) => {
     if (respuesta.status === 200) {
       const body = await respuesta.json();
       if (body.tipoUsuario === 1) {
-        
+
         navigation.navigate('MenuAdmin')
-       
-        
+
+
 
         return;
       } else {
-        
+
         navigation.navigate('Inicio')
-        await AsyncStorage.setItem('rut',  JSON.stringify(body.rut));
+        await AsyncStorage.setItem('rut', JSON.stringify(body.rut));
         return;
       }
     } else {
@@ -80,51 +80,51 @@ const Login = ({ navigation }) => {
 
   return (
     <KeyboardAwareScrollView>
-    <View style={styles.centro}>
-      <Image style={styles.logo}
-        source={require('../assets/IMG/Logo.png')}
+      <View style={styles.centro}>
+        <Image style={styles.logo}
+          source={require('../assets/IMG/Logo.png')}
 
-      />
-      <View >
-        <Button onPress={() => crearCuenta()}
-          style={styles.btnCrearCuenta} color='#0F0E0E'
-
-        > + Crear Cuenta</Button>
-      </View>
-
-      <View >
-        <TextInput
-          placeholder='Email'
-          placeholderTextColor={'#666'}
-          style={styles.input}
-          onChangeText={texto => guardarEmail(texto)}
-          value={email}
-          textAlign={'center'}
         />
+        <View >
+          <Button onPress={() => crearCuenta()}
+            style={styles.btnCrearCuenta} color='#0F0E0E'
 
-        <TextInput
-          style={styles.input}
-          onChangeText={texto => guardarContrasena(texto)}
-          value={contrasena}
-          placeholder='Contraseña'
-          placeholderTextColor={'#666'}
-          textAlign={'center'}
-          secureTextEntry={true}
-        />
-      </View>
+          > + Crear Cuenta</Button>
+        </View>
 
-      <View >
-        <Button onPress={() => inicioSesionUsuario()}
-          style={styles.btnIniciarSesion} color='#0F0E0E'
-        > Iniciar Sesión</Button>
-      </View>
+        <View >
+          <TextInput
+            placeholder='Email'
+            placeholderTextColor={'#666'}
+            style={styles.input}
+            onChangeText={texto => guardarEmail(texto)}
+            value={email}
+            textAlign={'center'}
+          />
 
-      <View >
-        <Button onPress={() => olvidasteContrasena()}
-          style={styles.btnOlvidasteTuContrasena}
-        > ¿Olvidaste tu contraseña?</Button>
+          <TextInput
+            style={styles.input}
+            onChangeText={texto => guardarContrasena(texto)}
+            value={contrasena}
+            placeholder='Contraseña'
+            placeholderTextColor={'#666'}
+            textAlign={'center'}
+            secureTextEntry={true}
+          />
+        </View>
+
+        <View >
+          <Button onPress={() => inicioSesionUsuario()}
+            style={styles.btnIniciarSesion} color='#0F0E0E'
+          > Iniciar Sesión</Button>
+        </View>
+
+        <View >
+          <Button onPress={() => olvidasteContrasena()}
+            style={styles.btnOlvidasteTuContrasena}
+          > ¿Olvidaste tu contraseña?</Button>
+        </View>
       </View>
-    </View>
 
     </KeyboardAwareScrollView>
   )
